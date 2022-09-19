@@ -1,0 +1,27 @@
+.add {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add .search-result {
+  width: calc(100% - 40px);
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add .search-result .detail {
+  height: 100%;
+  flex: 5;
+}
+.add .search-result .pagation-btns {
+  flex: 1;
+}
+.add .search-result .pagation-btns > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

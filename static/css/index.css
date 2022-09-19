@@ -1,14 +1,14 @@
-.main {
+.home {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
-.main > div {
+.home > div {
   width: 450px;
   height: 220px;
 }
-.main > div > .word-list {
+.home > div > .word-list {
   background-color: rgba(240, 240, 240);
   height: 160px;
   overflow: auto;
@@ -19,9 +19,9 @@
   justify-content: flex-start;
   align-items: center;
 }
-.main > div > .word-list li {
+.home > div > .word-list li {
 }
-.main > div > .word-list li > div {
+.home > div > .word-list li > div {
   background-color: white;
   font-size: 72px;
   display: flex;
@@ -32,11 +32,11 @@
   padding: 20px;
   border-radius: 12px;
 }
-.main .favorite {
+.home .favorite {
 }
-.main .recent {
+.home .recent {
 }
-.main .recap {
+.home .recap {
 }
 
 .plus-button {
