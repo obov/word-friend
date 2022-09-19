@@ -1,1 +1,45 @@
-{% extends "base.html"%} {% block content %} enlist {%endblock%}
+{% extends "base.html"%} {% block content %} 
+
+
+<script>
+    $("#keyword").keyup(function () {
+    console.log('al..');
+    // itcdelay(function () {
+    //     console.log('al..');
+    //     // $('#movie_list').empty();
+    //     send_keyword();
+    // }, 150);
+});
+</script>
+<div style="border: solid 3px tomato" class="signup">
+    
+    <input type="text" style="width: 90%; height:25px;" id="keyword" placeholder="찾으실 영화제목을 적어주세요">
+    <div style="border: solid 3px blue;width: 90%;display: grid;">
+        <!-- <div style="border: solid 3px gold;height:25px;;"></div> -->
+        <ul class="list_word">
+            <li style="border: solid 3px gold;">안</li>
+            <li>안</li>
+            <li>안</li>
+        </ul>
+    </div>
+
+    
+    
+    <form style="border: solid 1px gold" >
+      회원가입
+      <label style="border: solid 1px darkblue" for="id"
+        >id <input style="border: solid 1px darkgray" id="id" type="text"
+      /></label>
+      <label style="border: solid 1px darkblue" for="password"
+        >password <input style="border: solid 1px darkgray" id="password" type="password"
+      /></label>
+      <label style="border: solid 1px darkblue" for="confirm"
+        >confirm <input style="border: solid 1px darkgray" id="confirm" type="password"
+      /></label>
+      <div style="border: solid 1px gold" class="buttons">
+        <input type="button" value="cancel" />
+        <input type="button" onclick="go_signup()"  value="ok" />
+      </div>
+    </form>
+</div> 
+{%endblock%}
