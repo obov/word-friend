@@ -1,1 +1,20 @@
-{% extends "base.html"%} {% block content %} signup {%endblock%}
+{% extends "base.html"%} {% block content %}
+<div style="border: solid 3px tomato" class="signup">
+  <form style="border: solid 1px gold">
+    회원가입
+    <label style="border: solid 1px darkblue" for="id"
+      >id <input style="border: solid 1px darkgray" id="id" type="text"
+    /></label>
+    <label style="border: solid 1px darkblue" for="password"
+      >password <input style="border: solid 1px darkgray" id="password" type="password"
+    /></label>
+    <label style="border: solid 1px darkblue" for="confirm"
+      >confirm <input style="border: solid 1px darkgray" id="confirm" type="password"
+    /></label>
+    <div style="border: solid 1px gold" class="buttons">
+      <input type="button" value="cancel" />
+      <button>ok</button>
+    </div>
+  </form>
+</div>
+{%endblock%}
