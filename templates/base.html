@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}" />
+    <title>word friend</title>
+  </head>
+  <body>
+    <div style="border: solid 3px tomato" class="header">
+      <div style="border: solid 1px greenyellow" class="logo">logo</div>
+      <div style="border: solid 1px green" class="menu-toggle">hamburger</div>
+    </div>
+    {% block content %} {% endblock %}
+    <div style="border: solid 1px gold" class="menu">
+      <ul>
+        <li style="border: solid 1px salmon"><a href="/login">login</a></li>
+        <li style="border: solid 1px salmon"><a href="/signup">signup</a></li>
+        <li style="border: solid 1px salmon"><a href="/word/exam">단어테스트</a></li>
+        <li style="border: solid 1px salmon"><a href="/word/enlisted">등록한 단어</a></li>
+      </ul>
+    </div>
+  </body>
+</html>

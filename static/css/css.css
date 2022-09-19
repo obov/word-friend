@@ -2,8 +2,6 @@
   height: 80px;
   width: 500px;
   margin: 0 auto;
-  background-color: bisque;
-  color: red;
   display: flex;
   justify-content: space-between;
 }
@@ -19,7 +17,6 @@
   height: 100vh;
   width: 500px;
   margin: 0 auto;
-  color: blue;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
