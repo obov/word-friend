@@ -1,1 +1,19 @@
-{% extends "base.html"%} {% block content %} exam {%endblock%}
+{% extends "base.html"%} {% block content %}
+<section style="border: solid 3px tomato" class="exam">
+  <div style="border: solid 1px gold" class="turn">1/10</div>
+  <form style="border: solid 1px gold" action="">
+    <div style="border: solid 1px darkblue" class="word">abc</div>
+    <div class="exam-buttons">
+      <input type="button" value="check" />
+      <button>submit</button>
+    </div>
+  </form>
+</section>
+<section style="border: solid 3px tomato" class="exam">
+  <div style="border: solid 1px gold" class="result">
+    <h2 style="border: solid 1px darkblue">점수</h2>
+    <div style="border: solid 1px darkblue" class="score">8/10</div>
+    <div style="border: solid 1px darkblue" class="cheering-ment">good!!</div>
+  </div>
+</section>
+{%endblock%}
