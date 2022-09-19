@@ -32,7 +32,7 @@ def exam():
     return render_template('/word/exam.html')
 @app.route('/word/enlisted')
 def enlisted():
-    return render_template('/word/enlisted.html')
+    return render_template('/word/added_list.html')
 
 #로그인 api (session)
 @app.route("/login",methods=["post"])

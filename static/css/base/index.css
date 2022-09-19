@@ -3,6 +3,7 @@
 @import url("../signup.css");
 @import url("../login.css");
 @import url("../word/add.css");
+@import url("../word/added_list.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 ::-webkit-scrollbar {
   width: 8px;
@@ -23,7 +24,7 @@ a {
 body {
   background-color: rgb(200, 200, 200);
 }
-.header {
+body > .header {
   left: 50%;
   transform: translateX(-50%);
   height: 80px;
@@ -37,15 +38,19 @@ body {
   position: fixed;
   background-color: rgb(20, 20, 60);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+  z-index: 2;
 }
-.header > * {
+body > .header > * {
   width: 50px;
   height: 50px;
 }
-.header .logo {
+body > .header .logo {
   display: block;
 }
-.header .menu-toggle {
+body > .header .logo > a {
+  color: white;
+}
+body > .header .menu-toggle {
   padding: 4px;
   display: flex;
   flex-direction: column;
@@ -55,10 +60,10 @@ body {
   font-size: 28px;
   transition: all 0.5s;
 }
-.header .menu-toggle:hover {
+body > .header .menu-toggle:hover {
   text-shadow: 0px 0px 3px white;
 }
-.header .menu-toggle i {
+body > .header .menu-toggle i {
   cursor: pointer;
 }
 
@@ -69,6 +74,9 @@ main {
   margin: 0 auto;
   padding-top: 80px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.menu-checkbox {
+  display: none;
 }
 .menu-checkbox:checked + .menu {
   right: calc(50% - 250px);
@@ -81,6 +89,7 @@ main {
   right: -100px;
   top: 0px;
   transition: all 0.5s;
+  z-index: 3;
 }
 .menu .menu-header {
   display: block;

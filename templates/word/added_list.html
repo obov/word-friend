@@ -1,0 +1,59 @@
+{% extends "base.html"%} {% block content %}
+<section style="border: solid 3px tomato" class="added-list">
+  <div class="header">
+    <ul>
+      <li><label for="date">날짜별</label></li>
+      <li><label for="frequent">자주틀린단어</label></li>
+      <li><label for="complete">완료</label></li>
+    </ul>
+  </div>
+  <input name="detail" checked type="radio" id="date" />
+  <div style="border: solid 1px gold" class="ad-result">
+    <h1>날짜별</h1>
+    <div style="border: solid 1px darkblue" class="detail">
+      <ul>
+        <li>날짜 단어1</li>
+        <li>날짜 단어2</li>
+        <li>날짜 단어3</li>
+      </ul>
+    </div>
+    <div style="border: solid 1px darkblue" class="pagation-btns">
+      <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+      <div style="border: solid 1px chocolate" class="page">1</div>
+      <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+    </div>
+  </div>
+  <input name="detail" type="radio" id="frequent" />
+  <div style="border: solid 1px gold" class="ad-result">
+    <h1>자주틀린단어</h1>
+    <div style="border: solid 1px darkblue" class="detail">
+      <ul>
+        <li>자주 단어1</li>
+        <li>자주 단어2</li>
+        <li>자주 단어3</li>
+      </ul>
+    </div>
+    <div style="border: solid 1px darkblue" class="pagation-btns">
+      <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+      <div style="border: solid 1px chocolate" class="page">1</div>
+      <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+    </div>
+  </div>
+  <input name="detail" type="radio" id="complete" />
+  <div style="border: solid 1px gold" class="ad-result">
+    <h1>완료</h1>
+    <div style="border: solid 1px darkblue" class="detail">
+      <ul>
+        <li>완료 단어1</li>
+        <li>완료 단어2</li>
+        <li>완료 단어3</li>
+      </ul>
+    </div>
+    <div style="border: solid 1px darkblue" class="pagation-btns">
+      <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+      <div style="border: solid 1px chocolate" class="page">1</div>
+      <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+    </div>
+  </div>
+</section>
+{%endblock%}
