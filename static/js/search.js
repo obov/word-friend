@@ -1,6 +1,6 @@
 function send_keyword() {
 
-    let keyword = $('#keyword').val();
+    let keyword = $('#searchInput').val();
     $.ajax({
         type: "POST",
         url: "/search_word",
@@ -9,7 +9,6 @@ function send_keyword() {
             'keyword':keyword
         },
         success: function (response) {
-            console.log(response);
             if(response.data ==='검색 결과가 없습니다.'){
                 let temp =`
                     <li>검색 결과가 없습니다.</li>
@@ -51,7 +50,7 @@ $(document).ready(function () {
     })();
 
     //키보드 입력 감지
-    $("#keyword").keyup(function () {
+    $("#searchInput").keyup(function () {
         itcdelay(function () {
             $('.list_word').empty();
             send_keyword();
