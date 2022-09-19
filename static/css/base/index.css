@@ -2,14 +2,34 @@
 @import url("../index.css");
 @import url("../signup.css");
 @import url("../login.css");
+@import url("../word/add.css");
+@import url("../word/added_list.css");
+@import url("../word/exam.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(20, 20, 20, 0.3);
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.6);
+}
+a {
+  color: black;
+  text-decoration: none;
+}
 body {
   background-color: rgb(200, 200, 200);
 }
-.header {
+body > .header {
   left: 50%;
   transform: translateX(-50%);
   height: 80px;
-  width: 460px;
+  width: 452px;
   padding: 0 25px;
   display: flex;
   justify-content: space-between;
@@ -19,30 +39,35 @@ body {
   position: fixed;
   background-color: rgb(20, 20, 60);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+  z-index: 2;
 }
-.header > * {
+body > .header > * {
   width: 50px;
   height: 50px;
 }
-.header .logo {
+body > .header .logo {
   display: block;
 }
-.header .menu-toggle {
+body > .header .logo > a {
+  color: white;
+}
+body > .header .menu-toggle {
   padding: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-size: 28px;
+  transition: all 0.5s;
 }
-.header .menu-toggle > div {
-  background-color: white;
-  width: 20px;
-  height: 2px;
-  border-radius: 3px;
+body > .header .menu-toggle:hover {
+  text-shadow: 0px 0px 3px white;
 }
-.header .menu-toggle .second {
-  margin: 5px;
+body > .header .menu-toggle i {
+  cursor: pointer;
 }
+
 main {
   background-color: white;
   height: 150vh;
@@ -51,15 +76,61 @@ main {
   padding-top: 80px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
+.menu-checkbox {
+  display: none;
+}
 .menu-checkbox:checked + .menu {
-  right: 50%;
-  transform: translateX(50%);
+  right: calc(50% - 250px);
 }
 .menu {
+  background-color: white;
   height: 700px;
-  width: 200px;
+  width: 240px;
   position: fixed;
   right: -100px;
   top: 0px;
   transition: all 0.5s;
+  z-index: 3;
+}
+.menu .menu-header {
+  display: block;
+  color: white;
+  font-size: 28px;
+  height: 48px;
+  background-color: rgb(20, 20, 60);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.menu .menu-header label {
+  margin-right: 12px;
+  cursor: pointer;
+}
+.menu .menu-header label:hover {
+  text-shadow: 0px 0px 3px white;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+.menu ul li {
+  line-height: 24px;
+  padding: 5px;
+  min-width: 70%;
+  margin: 0 20px;
+  font-size: 24px;
+  font-weight: 900;
+  transition: all 0.5s;
+  border: solid 1px transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu ul li:hover {
+  border: solid 1px black;
 }

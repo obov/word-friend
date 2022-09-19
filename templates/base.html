@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/index.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="../static/js/account.js"></script> -->
     <script src="{{ url_for('static', filename='js/account.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
     <title>word friend</title>
@@ -14,20 +13,19 @@
   <body>
     <div class="header">
       <div style="border: solid 1px greenyellow" class="logo"><a href="/">logo</a></div>
-      <label style="border: solid 1px green" class="menu-toggle" for="menuToggle"
-        ><div class="first"></div>
-        <div class="second"></div>
-        <div class="third"></div
-      ></label>
+      <label class="menu-toggle" for="menuToggle"><i class="bi bi-list"></i></label>
     </div>
     <main>{% block content %} {% endblock %}</main>
     <input type="checkbox" id="menuToggle" class="menu-checkbox" />
-    <div style="border: solid 1px gold" class="menu">
+    <div class="menu">
+      <div class="menu-header">
+        <label for="menuToggle"><i class="bi bi-x-lg"></i></label>
+      </div>
       <ul>
-        <li style="border: solid 1px salmon"><a id="login" href="/login">login</a></li>
-        <li style="border: solid 1px salmon"><a id="signup" href="/signup">signup</a></li>
-        <li style="border: solid 1px salmon"><a href="/word/exam">단어테스트</a></li>
-        <li style="border: solid 1px salmon"><a href="/word/enlisted">등록한 단어</a></li>
+        <li><a href="/login">login</a></li>
+        <li><a href="/signup">signup</a></li>
+        <li><a href="/word/exam">단어테스트</a></li>
+        <li><a href="/word/enlisted">등록한 단어</a></li>
       </ul>
     </div>
   </body>

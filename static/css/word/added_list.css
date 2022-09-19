@@ -1,0 +1,43 @@
+.added-list {
+  padding-top: 42px;
+  height: 50%;
+}
+.added-list .header {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 76px;
+  padding-bottom: 12px;
+  background-color: rgb(40, 40, 120);
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+}
+.added-list .header ul {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  gap: 16px;
+}
+.added-list .header ul li label {
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+.added-list input {
+  display: none;
+}
+.added-list input + div {
+  display: none;
+}
+.added-list input:checked + div {
+  display: block;
+}
+.added-list > div .pagation-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

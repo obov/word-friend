@@ -26,15 +26,15 @@ def login():
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
-@app.route('/word/enlist')
-def enlist():
-    return render_template('/word/enlist.html')
+@app.route('/word/add')
+def add():
+    return render_template('/word/add.html')
 @app.route('/word/exam')
 def exam():
     return render_template('/word/exam.html')
 @app.route('/word/enlisted')
 def enlisted():
-    return render_template('/word/enlisted.html')
+    return render_template('/word/added_list.html')
 
 
 #자동완성

@@ -1,113 +1,70 @@
 {% extends "base.html"%} {% block content %}
 
-<div class="main">
+<section class="home">
   <h1>단어장입니다</h1>
-  <div style="border: solid 1px gold" class="favorite">
+  <div class="favorite">
     <h2>favorite</h2>
     <ul class="word-list">
       <li>
-        <div>
-          <div>hi</div>
-          <div>안녕</div>
-        </div>
+        <div>hi</div>
       </li>
       <li>
-        <div>
-          <div>hello</div>
-          <div>응안녕?</div>
-        </div>
+        <div>hello</div>
       </li>
       <li>
-        <div>
-          <div>how</div>
-          <div>오늘</div>
-        </div>
+        <div>how</div>
       </li>
       <li>
-        <div>
-          <div>are</div>
-          <div>기분이</div>
-        </div>
+        <div>are</div>
       </li>
       <li>
-        <div>
-          <div>you</div>
-          <div>어때</div>
-        </div>
+        <div>you</div>
       </li>
     </ul>
   </div>
-  <div style="border: solid 1px gold" class="recent">
+  <div class="recent">
     <h2>recent</h2>
     <ul class="word-list">
       <li>
-        <div>
-          <div>hi</div>
-          <div>안녕</div>
-        </div>
+        <div>hi</div>
       </li>
       <li>
-        <div>
-          <div>hello</div>
-          <div>응안녕?</div>
-        </div>
+        <div>hello</div>
       </li>
       <li>
-        <div>
-          <div>how</div>
-          <div>오늘</div>
-        </div>
+        <div>how</div>
       </li>
       <li>
-        <div>
-          <div>are</div>
-          <div>기분이</div>
-        </div>
+        <div>are</div>
       </li>
       <li>
-        <div>
-          <div>you</div>
-          <div>어때</div>
-        </div>
+        <div>you</div>
       </li>
     </ul>
   </div>
-  <div style="border: solid 1px gold" class="recap">
+  <div class="recap">
     <h2>recap</h2>
     <ul class="word-list">
       <li>
-        <div>
-          <div>hi</div>
-          <div>안녕</div>
-        </div>
+        <div>hi</div>
       </li>
       <li>
-        <div>
-          <div>hello</div>
-          <div>응안녕?</div>
-        </div>
+        <div>hello</div>
       </li>
       <li>
-        <div>
-          <div>how</div>
-          <div>오늘</div>
-        </div>
+        <div>how</div>
       </li>
       <li>
-        <div>
-          <div>are</div>
-          <div>기분이</div>
-        </div>
+        <div>are</div>
       </li>
       <li>
-        <div>
-          <div>you</div>
-          <div>어때</div>
-        </div>
+        <div>you</div>
       </li>
     </ul>
   </div>
+</section>
+<div class="plus-button">
+  <a href="/word/add"><i class="bi bi-plus-lg"></i></a>
 </div>
-<div style="border: solid 1px salmon" class="plus-button"><a href="/word/enlist">+</a></div>
 
 {%endblock%}
