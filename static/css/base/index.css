@@ -1,55 +1,65 @@
 @import url("./reset.css");
+@import url("../index.css");
 @import url("../signup.css");
 @import url("../login.css");
+body {
+  background-color: rgb(200, 200, 200);
+}
 .header {
+  left: 50%;
+  transform: translateX(-50%);
   height: 80px;
-  width: 500px;
-  margin: 0 auto;
+  width: 460px;
+  padding: 0 25px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: fixed;
+  background-color: rgb(20, 20, 60);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
-.header > div {
+.header > * {
   width: 50px;
   height: 50px;
 }
 .header .logo {
+  display: block;
 }
 .header .menu-toggle {
-}
-.main {
-  height: 100vh;
-  width: 500px;
-  margin: 0 auto;
+  padding: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
-.main > div {
-  width: 450px;
-  height: 300px;
+.header .menu-toggle > div {
+  background-color: white;
+  width: 20px;
+  height: 2px;
+  border-radius: 3px;
 }
-.main .favorite {
+.header .menu-toggle .second {
+  margin: 5px;
 }
-.main .recent {
+main {
+  background-color: white;
+  height: 150vh;
+  width: 500px;
+  margin: 0 auto;
+  padding-top: 80px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-.main .recap {
+.menu-checkbox:checked + .menu {
+  right: 50%;
+  transform: translateX(50%);
 }
 .menu {
   height: 700px;
-  width: 400px;
+  width: 200px;
   position: fixed;
-  right: -200px;
+  right: -100px;
   top: 0px;
-}
-.plus-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  right: 200px;
-  bottom: 300px;
+  transition: all 0.5s;
 }

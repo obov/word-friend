@@ -1,0 +1,41 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main > div {
+  width: 450px;
+  height: 300px;
+}
+.main > div > .word-list {
+  background-color: rgb(207, 241, 255);
+  padding: 10px;
+  border-radius: 10px;
+}
+.main > div > .word-list li {
+  margin: 4px 0;
+}
+.main > div > .word-list li > div {
+  display: grid;
+  grid-template-columns: 80px 90px;
+  justify-content: center;
+}
+.main .favorite {
+}
+.main .recent {
+}
+.main .recap {
+}
+
+.plus-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 200px;
+  bottom: 300px;
+}
