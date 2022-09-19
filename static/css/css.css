@@ -35,6 +35,13 @@
 }
 .main .recap {
 }
+.menu {
+  height: 700px;
+  width: 400px;
+  position: fixed;
+  right: -200px;
+  top: 0px;
+}
 .plus-button {
   width: 60px;
   height: 60px;
