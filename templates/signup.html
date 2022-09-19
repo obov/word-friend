@@ -1,6 +1,6 @@
 {% extends "base.html"%} {% block content %}
 <div style="border: solid 3px tomato" class="signup">
-  <form style="border: solid 1px gold">
+  <form style="border: solid 1px gold" >
     회원가입
     <label style="border: solid 1px darkblue" for="id"
       >id <input style="border: solid 1px darkgray" id="id" type="text"
@@ -13,7 +13,7 @@
     /></label>
     <div style="border: solid 1px gold" class="buttons">
       <input type="button" value="cancel" />
-      <button>ok</button>
+      <input type="button" onclick="go_signup()"  value="ok" />
     </div>
   </form>
 </div>
