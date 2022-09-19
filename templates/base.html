@@ -9,11 +9,16 @@
     <title>word friend</title>
   </head>
   <body>
-    <div style="border: solid 3px tomato" class="header">
-      <div style="border: solid 1px greenyellow" class="logo">logo</div>
-      <div style="border: solid 1px green" class="menu-toggle">hamburger</div>
+    <div class="header">
+      <div style="border: solid 1px greenyellow" class="logo"><a href="/">logo</a></div>
+      <label style="border: solid 1px green" class="menu-toggle" for="menuToggle"
+        ><div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div
+      ></label>
     </div>
-    {% block content %} {% endblock %}
+    <main>{% block content %} {% endblock %}</main>
+    <input type="checkbox" id="menuToggle" class="menu-checkbox" />
     <div style="border: solid 1px gold" class="menu">
       <ul>
         <li style="border: solid 1px salmon"><a href="/login">login</a></li>
