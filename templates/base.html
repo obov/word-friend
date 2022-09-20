@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/index.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
     <script src="{{ url_for('static', filename='js/account.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
     <title>word friend</title>
@@ -23,8 +27,8 @@
           <label for="menuToggle"><i class="bi bi-x-lg"></i></label>
         </div>
         <ul>
-          <li><a href="/login">login</a></li>
-          <li><a href="/signup">signup</a></li>
+          <li><a href="/login" id="login">login</a></li>
+          <li><a href="/signup" id="signup">signup</a></li>
           <li><a href="/word/exam">단어테스트</a></li>
           <li><a href="/word/enlisted">등록한 단어</a></li>
         </ul>

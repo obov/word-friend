@@ -4,7 +4,9 @@ from flask import Flask ,render_template, session,jsonify,request,url_for,redire
 import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-
+import hashlib
+import json
+import jwt
 
 #db 접속
 headers = {
@@ -16,19 +18,15 @@ db = client.dbsparta
 
 app = Flask(__name__)
 
-def log_validator(func) :
-    def wrapper() :
-        if "id" in session:
-            return func()
-        else :
-            return redirect(url_for('login'))
-    return wrapper
+SECRET_KEY = 'tkaruqtkf159159'
 
 @app.route('/',endpoint="home")
-@log_validator
 def home():
-    return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
-
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
+        return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
+    else :
+        return redirect(url_for('login'))
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -37,23 +35,26 @@ def signup():
     return render_template('signup.html')
 
 @app.route('/word/add',endpoint="add")
-@log_validator
 def add():
-    return render_template('/word/add.html')
-
-@app.route('/word/exam',endpoint="exam")
-@log_validator
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
+        return render_template('/word/add.html')
+    else :
+        return redirect(url_for('login'))
+@app.route('/word/exam')
 def exam():
-    return render_template('/word/exam.html')  
-
-@app.route('/word/enlisted',endpoint="added_list")
-@log_validator
-def added_list():
-    return render_template('/word/added_list.html')
-
-
-
-    
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
+        return render_template('/word/exam.html')
+    else :
+        return redirect(url_for('login'))
+@app.route('/word/enlisted')
+def enlisted():
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
+        return render_template('/word/added_list.html')
+    else :
+        return redirect(url_for('login'))
 
 
 #자동완성
@@ -122,43 +123,55 @@ def search_word():
 def log_in():
     input_data = request.get_json()
     id = input_data['id']
-    pw = str(input_data['pw'])
+    pw = input_data['pw']
+    print(id,pw)
+    #암호화! -> db에 저장된 암호화된 비밀번호를 조회해야함!
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     
     #db조회
     try:
-        user = db.users.find_one({'id': id})
-        user_id = user['id']
-        
-        if id == user['id'] and pw == user['pw']:
-            session['id'] = id
-            return jsonify({'msg' : '성공!','result':'success'})
-            
+        find_result = db.users.find_one({'id': id,'pw':pw_hash})
+        if find_result is not None:
+            #검색 결과가 None 아니면 playload에 정보를 저장하고 토큰을 발급해서 전달 !
+            playload = {
+                'id' : find_result['id'],
+
+            }
+
+            jwt_token = jwt.encode(playload,SECRET_KEY, algorithm='HS256')
+            return jsonify({'msg' : '성공!','result':'success', 'jwt_token': jwt_token})        
         else:
             return jsonify({'msg' : '비밀번호를 확인해주세요.','result':'false'})
 
     except:        
         return jsonify({'msg': '일치하는 계정이 없습니다.','result':'false'})
 
-#로그아웃
-@app.route("/logout",methods=["post"])
-def log_out():
-    session.pop('id',None)
-    return jsonify({'result':'성공!!'})
+
 
 #로그인체크
 @app.route("/login_check",methods=["post"])
 def  login_check():
-    if "id" in session:
-        return jsonify({'loginData': session['id']})
-    else :
+    token = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        find_result = db.users.find_one({'id': payload['id']})
+        return jsonify({'loginData': 'login'})
+    except jwt.ExpiredSignatureError:
+        return jsonify({'loginData': 'notlogin'})
+    except jwt.exceptions.DecodeError:
         return jsonify({'loginData': 'notlogin'})
 
 #로그인체크
 @app.route("/word/login_check",methods=["post"])
 def  word_login_check():
-    if "id" in session:
-        return jsonify({'loginData': session['id']})
-    else :
+    token = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        find_result = db.users.find_one({'id': payload['id']})
+        return jsonify({'loginData': 'login'})
+    except jwt.ExpiredSignatureError:
+        return jsonify({'loginData': 'notlogin'})
+    except jwt.exceptions.DecodeError:
         return jsonify({'loginData': 'notlogin'})
 
 #회원가입
@@ -166,8 +179,15 @@ def  word_login_check():
 def  sign_up():
     try:
         input_data = request.get_json()
-        doc = {'id':input_data['id'],'pw':input_data['pw']}
+        id = input_data['id']
+        pw = input_data['pw']
+
+        #암호화!
+        pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+
+        doc = {'id':id,'pw':pw_hash}
         db.users.insert_one(doc)
+
         return jsonify({'msg': '회원가입 완료! 로그인 해주세요!'})
     except:
         return jsonify({'msg': '회원가입에 실패하였습니다. 관리자에게 문의해주세요'})
@@ -175,8 +195,6 @@ def  sign_up():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'super secret key'
-    app.debug=True
-    app.run('0.0.0.0', port=5001, debug=True)
+    app.run('0.0.0.0', port=5002, debug=True)
     
 
