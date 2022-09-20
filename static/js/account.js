@@ -17,6 +17,8 @@ function login(){
     success: function (response) {
         alert(response.msg);
         if(response.result ==='success'){
+            // 전체 사이트에 대해 7일 뒤에 만료되는 쿠키 생성
+            $.cookie('mytoken', response.jwt_token, { expires: 7, path: '/' })
             document.location.href = '/';
         }
     }
@@ -24,15 +26,7 @@ function login(){
 }
 
 function logout(){
-    $.ajax({
-        type: "POST",
-        url: "/logout",
-        data: {},
-        success: function (response) {
-            alert('로그아웃 되었습니다.');
-            document.location.href = '/';
-        }
-    }); 
+    $.removeCookie('mytoken', { path: '/' }); 
 }
 
 function go_signup(){
@@ -86,7 +80,6 @@ function go_signup(){
 
 
 $(document).ready(function () {
-
     //로그인 확인
     $.ajax({
         type: "POST",
@@ -94,7 +87,7 @@ $(document).ready(function () {
         data: {},
         success: function (response) {
             let responseData = response.loginData;
-
+            console.log(response);
             //로그인 여부에 따라서 메뉴에 로그인/로그아웃 버튼으로 변경
             if(responseData !== 'notlogin'){
                 $('#login').attr('href','').attr('onclick','logout()').text('로그아웃');
