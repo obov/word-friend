@@ -46,3 +46,71 @@ const handleClickComplete = function () {
   console.log("click complete");
   $("#complete").toggleClass("checked");
 };
+
+const dragStart = function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.preventDefault();
+  if (e.type == "touchstart") {
+    $(document).off("mousedown", dragStart);
+    startPoint = e.originalEvent.touches[0].pageX;
+  } else {
+    startPoint = e.pageX;
+  }
+  dragDist = 0;
+  $("#wordList").on("touchmove mousemove", dragMove);
+};
+function dragMove(e) {
+  if (e.type == "touchmove") {
+    movePoint = e.originalEvent.touches[0].pageX;
+  } else {
+    movePoint = e.pageX;
+  }
+  dragDist = startPoint - movePoint;
+  console.log(dragDist);
+  // dragDist = ((movePoint - startPoint) / $(".slider").height()) * 100;
+
+  // $(".slider").addClass("dragging");
+
+  // $(".slide, .bg").css({
+  //   transition: "0ms",
+  // });
+
+  // if (dragDist < 0) {
+  //   $(".active .bg").css({
+  //     opacity: 1 + dragDist / 200,
+  //   });
+  //   $(".active")
+  //     .css({
+  //       transform: "translate3d(0," + dragDist / 2 + "%,0)",
+  //     })
+  //     .next()
+  //     .css({
+  //       transform: "translate3d(0," + (100 + dragDist) + "%,0)",
+  //     });
+  // }
+
+  // if (dragDist > 0) {
+  //   $(".active")
+  //     .css({
+  //       transform: "translate3d(0," + dragDist + "%,0)",
+  //     })
+  //     .prev()
+  //     .css({
+  //       animation: "none",
+  //       transform: "translate3d(0," + (-50 + dragDist / 2) + "%,0)",
+  //     })
+  //     .find(".bg")
+  //     .css({
+  //       opacity: 0.5 + dragDist / 200,
+  //     });
+  // }
+}
+const dragEnd = function (e) {
+  e.preventDefault();
+  console.log(e);
+  $("#wordList").off("touchmove mousemove", dragMove);
+};
+
+$("#wordList").on("touchstart mousedown", dragStart);
+$("#wordList").on("touchend mouseup", dragEnd);

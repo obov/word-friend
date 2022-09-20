@@ -41,3 +41,8 @@
   justify-content: center;
   align-items: center;
 }
+@media (max-width: 500px) {
+  .added-list .header {
+    width: 380px;
+  }
+}

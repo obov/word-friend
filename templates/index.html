@@ -4,7 +4,7 @@
   <h1>단어장입니다</h1>
   <div class="favorite">
     <h2>favorite</h2>
-    <ul class="word-list">
+    <ul class="word-list" id="wordList">
       {% for word in words %}
       <li>
         <div class="word-card" onclick="handleClickWordCard('{{word.value}}','{{word.favorite}}','{{word.favorite}}')">

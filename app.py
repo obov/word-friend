@@ -24,7 +24,7 @@ def log_validator(func) :
             return redirect(url_for('login'))
     return wrapper
 
-@app.route('/')
+@app.route('/',endpoint="home")
 @log_validator
 def home():
     return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
@@ -36,19 +36,19 @@ def login():
 def signup():
     return render_template('signup.html')
 
-@app.route('/word/add')
+@app.route('/word/add',endpoint="add")
 @log_validator
 def add():
     return render_template('/word/add.html')
 
-@app.route('/word/exam')
+@app.route('/word/exam',endpoint="exam")
 @log_validator
 def exam():
     return render_template('/word/exam.html')  
 
-@app.route('/word/enlisted')
+@app.route('/word/enlisted',endpoint="added_list")
 @log_validator
-def enlisted():
+def added_list():
     return render_template('/word/added_list.html')
 
 

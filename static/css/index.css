@@ -143,3 +143,9 @@
 .word-viewer .content .btns-wrapper .complete.checked {
   color: chartreuse;
 }
+@media (max-width: 500px) {
+  .home > div {
+    width: 330px;
+    height: 220px;
+  }
+}

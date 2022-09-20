@@ -22,10 +22,13 @@ a {
   color: black;
   text-decoration: none;
 }
+body > .wrapper {
+  overflow-x: hidden;
+}
 body {
   background-color: rgb(200, 200, 200);
 }
-body > .header {
+body > .wrapper > .header {
   left: 50%;
   transform: translateX(-50%);
   height: 80px;
@@ -41,17 +44,17 @@ body > .header {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
   z-index: 2;
 }
-body > .header > * {
+body > .wrapper > .header > * {
   width: 50px;
   height: 50px;
 }
-body > .header .logo {
+body > .wrapper > .header .logo {
   display: block;
 }
-body > .header .logo > a {
+body > .wrapper > .header .logo > a {
   color: white;
 }
-body > .header .menu-toggle {
+body > .wrapper > .header .menu-toggle {
   padding: 4px;
   display: flex;
   flex-direction: column;
@@ -61,10 +64,10 @@ body > .header .menu-toggle {
   font-size: 28px;
   transition: all 0.5s;
 }
-body > .header .menu-toggle:hover {
+body > .wrapper > .header .menu-toggle:hover {
   text-shadow: 0px 0px 3px white;
 }
-body > .header .menu-toggle i {
+body > .wrapper > .header .menu-toggle i {
   cursor: pointer;
 }
 
@@ -87,7 +90,7 @@ main {
   height: 700px;
   width: 240px;
   position: fixed;
-  right: -100px;
+  right: -240px;
   top: 0px;
   transition: all 0.5s;
   z-index: 3;
@@ -138,3 +141,11 @@ main {
   position: relative;
   z-index: 3;
 }
+@media (max-width: 500px) {
+  body > .wrapper > .header {
+    width: 332px;
+  }
+  main {
+    width: 380px;
+  }
+} ;
