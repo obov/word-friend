@@ -24,12 +24,16 @@ SECRET_KEY = 'tkaruqtkf159159'
 def home():
     logindata = login_check().get_json()['loginData']
     if logindata == 'login':
-        return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
+        words = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_data = '-'.join(word['value'] for word in words)
+        return render_template('index.html',words=words,words_for_data=words_for_data)
     else :
         return redirect(url_for('login'))
+    
 @app.route('/login')
 def login():
     return render_template('login.html')
+
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
@@ -41,6 +45,7 @@ def add():
         return render_template('/word/add.html')
     else :
         return redirect(url_for('login'))
+    
 @app.route('/word/exam')
 def exam():
     logindata = login_check().get_json()['loginData']
@@ -48,6 +53,7 @@ def exam():
         return render_template('/word/exam.html')
     else :
         return redirect(url_for('login'))
+    
 @app.route('/word/enlisted')
 def enlisted():
     logindata = login_check().get_json()['loginData']

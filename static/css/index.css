@@ -7,6 +7,36 @@
 .home > div {
   width: 450px;
   height: 220px;
+  overflow: hidden;
+}
+.home > div > .words {
+  position: relative;
+  background-color: rgba(240, 240, 240);
+  width: 300%;
+  height: 160px;
+  left: -100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.home > div > .words .wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.home > div > .words .cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 90%;
+  width: 90%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 900;
+  font-size: 60px;
+  cursor: pointer;
 }
 .home > div > .word-list {
   background-color: rgba(240, 240, 240);

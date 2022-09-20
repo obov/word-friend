@@ -1,10 +1,6 @@
 const handleClickWordCard = function (value, favorite, complete) {
-  console.log("word card");
-  console.log("value : ", value);
-  const fav = pyBoolToJs(favorite);
-  const comp = pyBoolToJs(complete);
-  console.log("fav : ", fav);
-  console.log("comp : ", comp);
+  const fav = typeof favorite === "boolean" ? favorite : pyBoolToJs(favorite);
+  const comp = typeof complete === "boolean" ? complete : pyBoolToJs(complete);
   $("#modalPlace").append(`
     <div id="wordViewer" class="word-viewer">
       <div class="header-wrapper">
@@ -36,7 +32,7 @@ const handleClickWordCard = function (value, favorite, complete) {
   });
   setTimeout(function () {
     $("#wordViewer").addClass("slide-up");
-  }, 0);
+  }, 1);
 };
 const handleClickFav = function () {
   console.log("click favorite");
@@ -47,9 +43,34 @@ const handleClickComplete = function () {
   $("#complete").toggleClass("checked");
 };
 
+const cycleFromArr = (arr) => (number) => {
+  const { length: len } = arr;
+  return ((number % len) + len) % len;
+};
+let dragDist = 0;
+let isMovable = true;
+let isMoving = false;
+let clickTime = 0;
+const values = $("#words").data("values").split("-");
+const cycle = cycleFromArr(values);
+let showIndex = 0;
+const datasToShow = (showIndex) => [-1, 0, 1].map((e) => values[cycle(e + showIndex)]);
+const insertValuesOnCards = function () {
+  $(".cards").each(function (index, card) {
+    $(card).text(datasToShow(showIndex)[index]);
+  });
+};
+$("#showing-card").on("touchstart mousedown", function () {
+  clickTime = new Date().getTime();
+});
+$("#showing-card").on("touchend mouseup", function () {
+  const clickTimeEnd = new Date().getTime();
+  if (clickTimeEnd - clickTime < 100 && !isMoving) {
+    handleClickWordCard($("#showing-card").text(), true, false);
+  }
+});
+insertValuesOnCards();
 const dragStart = function (e) {
-  e.preventDefault();
-  console.log(e);
   e.preventDefault();
   if (e.type == "touchstart") {
     $(document).off("mousedown", dragStart);
@@ -57,60 +78,63 @@ const dragStart = function (e) {
   } else {
     startPoint = e.pageX;
   }
-  dragDist = 0;
-  $("#wordList").on("touchmove mousemove", dragMove);
+  $("#words").on("touchmove mousemove", dragMove);
 };
+
 function dragMove(e) {
   if (e.type == "touchmove") {
     movePoint = e.originalEvent.touches[0].pageX;
   } else {
     movePoint = e.pageX;
   }
-  dragDist = startPoint - movePoint;
-  console.log(dragDist);
-  // dragDist = ((movePoint - startPoint) / $(".slider").height()) * 100;
-
-  // $(".slider").addClass("dragging");
-
-  // $(".slide, .bg").css({
-  //   transition: "0ms",
-  // });
-
-  // if (dragDist < 0) {
-  //   $(".active .bg").css({
-  //     opacity: 1 + dragDist / 200,
-  //   });
-  //   $(".active")
-  //     .css({
-  //       transform: "translate3d(0," + dragDist / 2 + "%,0)",
-  //     })
-  //     .next()
-  //     .css({
-  //       transform: "translate3d(0," + (100 + dragDist) + "%,0)",
-  //     });
-  // }
-
-  // if (dragDist > 0) {
-  //   $(".active")
-  //     .css({
-  //       transform: "translate3d(0," + dragDist + "%,0)",
-  //     })
-  //     .prev()
-  //     .css({
-  //       animation: "none",
-  //       transform: "translate3d(0," + (-50 + dragDist / 2) + "%,0)",
-  //     })
-  //     .find(".bg")
-  //     .css({
-  //       opacity: 0.5 + dragDist / 200,
-  //     });
-  // }
+  isMoving = true;
+  if (isMovable) {
+    dragDist = ((movePoint - startPoint) / $("#favorite").width()) * 100;
+    if (dragDist < 0) {
+      $("#words").css("left", dragDist - 100 + "%");
+      if (dragDist < -20) {
+        isMovable = false;
+        $("#words").css("transition", "all 0.3s");
+        $("#words").css("left", "-200%");
+        setTimeout(function () {
+          $("#words").css("transition", "none");
+          $("#words").css("left", "-100%");
+          showIndex = cycle(showIndex + 1);
+          insertValuesOnCards();
+        }, 300);
+      }
+    }
+    if (dragDist > 0) {
+      $("#words").css("left", dragDist - 100 + "%");
+      if (dragDist > 20) {
+        isMovable = false;
+        $("#words").css("transition", "all 0.3s");
+        $("#words").css("left", "0");
+        setTimeout(function () {
+          $("#words").css("transition", "none");
+          $("#words").css("left", "-100%");
+          showIndex = cycle(showIndex - 1);
+          insertValuesOnCards();
+        }, 300);
+      }
+    }
+  }
 }
 const dragEnd = function (e) {
   e.preventDefault();
-  console.log(e);
-  $("#wordList").off("touchmove mousemove", dragMove);
+  $("#words").off("touchmove mousemove", dragMove);
+  if (Math.abs(dragDist) < 20) {
+    $("#words").css("transition", "all 0.3s");
+    $("#words").css("left", "-100%");
+    setTimeout(function () {
+      $("#words").css("transition", "none");
+    }, 300);
+  } else {
+    isMovable = true;
+    isMoving = false;
+  }
+  dragDist = 0;
 };
 
-$("#wordList").on("touchstart mousedown", dragStart);
-$("#wordList").on("touchend mouseup", dragEnd);
+$("#words").on("touchstart mousedown", dragStart);
+$("#words").on("touchend mouseup", dragEnd);

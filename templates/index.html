@@ -2,17 +2,19 @@
 
 <section class="home">
   <h1>단어장입니다</h1>
-  <div class="favorite">
+  <div class="favorite" id="favorite">
     <h2>favorite</h2>
-    <ul class="word-list" id="wordList">
-      {% for word in words %}
-      <li>
-        <div class="word-card" onclick="handleClickWordCard('{{word.value}}','{{word.favorite}}','{{word.favorite}}')">
-          <h3>{{word.value}}</h3>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="words" id="words" data-values="{{words_for_data}}">
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards" id="showing-card"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+    </div>
   </div>
   <div class="recent">
     <h2>recent</h2>
