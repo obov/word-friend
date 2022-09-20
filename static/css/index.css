@@ -178,4 +178,7 @@
     width: 330px;
     height: 220px;
   }
+  .plus-button {
+    right: calc(50% - 150px);
+  }
 }

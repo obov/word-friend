@@ -51,7 +51,7 @@ let dragDist = 0;
 let isMovable = true;
 let isMoving = false;
 let clickTime = 0;
-const values = $("#words").data("values").split("-");
+const values = location.pathname === PATHNAME.HOME ? $("#words").data("values").split("-") : "";
 const cycle = cycleFromArr(values);
 let showIndex = 0;
 const datasToShow = (showIndex) => [-1, 0, 1].map((e) => values[cycle(e + showIndex)]);

@@ -54,8 +54,8 @@ def exam():
     else :
         return redirect(url_for('login'))
     
-@app.route('/word/enlisted')
-def enlisted():
+@app.route('/word/added_list')
+def added_list():
     logindata = login_check().get_json()['loginData']
     if logindata == 'login':
         return render_template('/word/added_list.html')

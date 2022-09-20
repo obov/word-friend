@@ -148,4 +148,8 @@ main {
   main {
     width: 380px;
   }
+  .menu-checkbox:checked + .menu {
+    right: 50%;
+    transform: translateX(calc(50% + 70px));
+  }
 } ;
