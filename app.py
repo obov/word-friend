@@ -16,37 +16,44 @@ db = client.dbsparta
 
 app = Flask(__name__)
 
+def log_validator(func) :
+    def wrapper() :
+        if "id" in session:
+            return func()
+        else :
+            return redirect(url_for('login'))
+    return wrapper
 
 @app.route('/')
+@log_validator
 def home():
-    if "id" in session:
-        return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
-    else :
-        return redirect(url_for('login'))
+    return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
+
 @app.route('/login')
 def login():
     return render_template('login.html')
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
+
 @app.route('/word/add')
+@log_validator
 def add():
-    if "id" in session:
-        return render_template('/word/add.html')
-    else :
-        return redirect(url_for('login'))
+    return render_template('/word/add.html')
+
 @app.route('/word/exam')
+@log_validator
 def exam():
-    if "id" in session:
-        return render_template('/word/exam.html')
-    else :
-        return redirect(url_for('login'))
+    return render_template('/word/exam.html')  
+
 @app.route('/word/enlisted')
+@log_validator
 def enlisted():
-    if "id" in session:
-        return render_template('/word/added_list.html')
-    else :
-        return redirect(url_for('login'))
+    return render_template('/word/added_list.html')
+
+
+
+    
 
 
 #자동완성
@@ -164,6 +171,8 @@ def  sign_up():
         return jsonify({'msg': '회원가입 완료! 로그인 해주세요!'})
     except:
         return jsonify({'msg': '회원가입에 실패하였습니다. 관리자에게 문의해주세요'})
+    
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
