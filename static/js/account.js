@@ -80,6 +80,7 @@ function go_signup(){
 
 
 $(document).ready(function () {
+
     //로그인 확인
     $.ajax({
         type: "POST",
@@ -87,7 +88,6 @@ $(document).ready(function () {
         data: {},
         success: function (response) {
             let responseData = response.loginData;
-            console.log(response);
             //로그인 여부에 따라서 메뉴에 로그인/로그아웃 버튼으로 변경
             if(responseData !== 'notlogin'){
                 $('#login').attr('href','').attr('onclick','logout()').text('로그아웃');

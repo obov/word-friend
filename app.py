@@ -5,7 +5,7 @@ import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import hashlib
-import datetime
+import json
 import jwt
 
 #db 접속
@@ -22,7 +22,8 @@ SECRET_KEY = 'tkaruqtkf159159'
 
 @app.route('/')
 def home():
-    if "id" in session:
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
         return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
     else :
         return redirect(url_for('login'))
@@ -34,19 +35,22 @@ def signup():
     return render_template('signup.html')
 @app.route('/word/add')
 def add():
-    if "id" in session:
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
         return render_template('/word/add.html')
     else :
         return redirect(url_for('login'))
 @app.route('/word/exam')
 def exam():
-    if "id" in session:
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
         return render_template('/word/exam.html')
     else :
         return redirect(url_for('login'))
 @app.route('/word/enlisted')
 def enlisted():
-    if "id" in session:
+    logindata = login_check().get_json()['loginData']
+    if logindata == 'login':
         return render_template('/word/added_list.html')
     else :
         return redirect(url_for('login'))
