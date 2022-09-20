@@ -1,6 +1,6 @@
 from mimetypes import init
 from types import MethodType
-from flask import Flask ,render_template, session,jsonify,request
+from flask import Flask ,render_template, session,jsonify,request,url_for,redirect
 import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
@@ -19,7 +19,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
+    if "id" in session:
+        return render_template('index.html',words=[{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}])
+    else :
+        return redirect(url_for('login'))
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -28,13 +31,22 @@ def signup():
     return render_template('signup.html')
 @app.route('/word/add')
 def add():
-    return render_template('/word/add.html')
+    if "id" in session:
+        return render_template('/word/add.html')
+    else :
+        return redirect(url_for('login'))
 @app.route('/word/exam')
 def exam():
-    return render_template('/word/exam.html')
+    if "id" in session:
+        return render_template('/word/exam.html')
+    else :
+        return redirect(url_for('login'))
 @app.route('/word/enlisted')
 def enlisted():
-    return render_template('/word/added_list.html')
+    if "id" in session:
+        return render_template('/word/added_list.html')
+    else :
+        return redirect(url_for('login'))
 
 
 #자동완성
