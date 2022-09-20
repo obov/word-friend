@@ -134,3 +134,7 @@ main {
 .menu ul li:hover {
   border: solid 1px black;
 }
+.modal-place {
+  position: relative;
+  z-index: 3;
+}
