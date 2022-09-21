@@ -1,0 +1,35 @@
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 50%;
+}
+.auth-page .btns-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.auth-page > input {
+  display: none;
+}
+.auth-page > input:checked + div {
+  display: flex;
+}
+.auth-page .login,
+.auth-page .signup {
+  display: none;
+  width: 80%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80%;
+}
+.auth-page .login form,
+.auth-page .signup form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

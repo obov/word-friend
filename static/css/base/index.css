@@ -1,7 +1,6 @@
 @import url("./reset.css");
 @import url("../index.css");
-@import url("../signup.css");
-@import url("../login.css");
+@import url("../auth.css");
 @import url("../word/add.css");
 @import url("../word/added_list.css");
 @import url("../word/exam.css");
@@ -136,6 +135,9 @@ main {
 }
 .menu ul li:hover {
   border: solid 1px black;
+}
+.menu ul .logout {
+  cursor: pointer;
 }
 .modal-place {
   position: relative;
