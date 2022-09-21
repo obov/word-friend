@@ -34,10 +34,6 @@ def home():
 def auth():
     return render_template('auth.html')
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
@@ -202,26 +198,12 @@ def  sign_up():
     except:
         return jsonify({'msg': '회원가입에 실패하였습니다. 관리자에게 문의해주세요'})
 
-#연습용 단어 추가
-@app.route("/value", methods=["POST"])
-def value_post():
-    value_receive = request.form['value_give']
-    mean_receive = request.form['mean_give']
 
-    test_list = list(db.value.find({}, {'_id': False}))
-    count = len(test_list) + 1
+@app.route('/')
+def test():
+    return render_template('test.html')
 
-    doc = {
-        'num':count,
-        'value':value_receive,
-        'mean':mean_receive,
-        'done':0,
-        'show':0
-    }
-    db.value.insert_one(doc)
-    return jsonify({'msg': '등록 완료!'})
-
-#뜻 확인
+#뜻 보이기
 @app.route("/test/showmean", methods=["POST"])
 def show_mean():
     num_receive = request.form['num_give']
@@ -234,6 +216,7 @@ def test_pass():
     num_receive = request.form['num_give']
     db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
     db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.value.update_one({'num': int(num_receive)+1}, {'$set': {'show': 0}})
     return jsonify({'msg': 'pass'})
 
 #테스트 페일
@@ -242,15 +225,28 @@ def test_fail():
     num_receive = request.form['num_give']
     db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
     db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.value.update_one({'num': int(num_receive) + 1}, {'$set': {'show': 0}})
     return jsonify({'msg': 'fail'})
+
+#시험 준비상태
+@app.route("/test", methods=["POST"])
+def test_ready():
+
+    for i in range(13):
+        db.value.update_one({'done':1},{'$set': {'done': 0}})
+        db.value.update_one({'num':i},{'$set': {'testnum': random.randint(1,13)}})
+        db.value.update_one({'show':0},{'$set': {'show': 1}})
+    db.value.update_one({'num': 1},{'$set': {'show': 0}})
+
+
+    return jsonify({'msg': '준비완료'})
 
 #단어리스트
 @app.route("/test", methods=["GET"])
 def test_get():
     value_list = list(db.value.find({}, {'_id': False}))
-
     return jsonify({'tests': value_list})
-    
+
 
 
 if __name__ == '__main__':
