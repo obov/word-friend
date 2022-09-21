@@ -75,21 +75,10 @@
             min-height: 48px;
         }
 
-        .mybox > li > h2 {
-            max-width: 75%;
-            font-size: 20px;
-            font-weight: 500;
-            margin-right: auto;
-            margin-bottom: 0px;
-        }
-
-        .mybox > li > h2.done {
-            text-decoration: line-through
-        }
     </style>
     <script>
         $(document).ready(function () {
-            start_test();
+            start_test()
         });
 
 
@@ -98,6 +87,18 @@
                 type: "POST",
                 url: "/test/showmean",
                 data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function ready_test() {
+            $.ajax({
+                type: "POST",
+                url: "/test",
+                data: {},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -124,18 +125,17 @@
                         if (done == 0 && show == 0) {
                             temp_html = `<div class="mybucket">
                                             <div class="numbox">
-                                                <h5>${num}/10</h5>
+                                                <h5>${i+1}/10</h5>
                                             </div>
                                             <div class="testbox">
                                                 <h1>${value}</h1>
                                                 <button class="meanbox" onclick="show_mean(${num})">뜻 확인</button>
                                             </div>
                                         </div>`
-                        }
-                        else if (done == 1 && show == 0) {
+                        } else if (done == 1 && show == 0) {
                             temp_html = ` <div class="mybucket">
                                             <div class="numbox">
-                                                <h5>${num}/10</h5>
+                                                <h5>${i+1}/10</h5>
                                             </div>
                                             <div class="testbox">
                                                 <h1>${mean}</h1>
@@ -145,8 +145,8 @@
                                                 </div>
                                             </div>
                                         </div>`
-                        }
-                        else {
+                        } else {
+
                         }
                         $('#bucket-list').append(temp_html)
 
@@ -161,7 +161,7 @@
             $.ajax({
                 type: "POST",
                 url: "/value",
-                data: {value_give: value,mean_give: mean},
+                data: {value_give: value, mean_give: mean},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -173,7 +173,7 @@
             $.ajax({
                 type: "POST",
                 url: "/test/pass",
-                data: {num_give: num },
+                data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -185,7 +185,7 @@
             $.ajax({
                 type: "POST",
                 url: "/test/fail",
-                data: {num_give: num },
+                data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -194,12 +194,11 @@
         }
     </script>
 </head>
+
 <body>
 <div class="mybox">
     <div class="mybucket">
-        <input id="value" class="form-control" type="text" placeholder="단어 입력">
-        <input id="mean" class="form-control" type="text" placeholder="뜻 입력">
-        <button onclick="save_value()" type="button" class="btn btn-outline-primary">기록하기</button>
+        <button onclick="ready_test()" type="button" class="btn btn-outline-primary">시험준비</button>
     </div>
 </div>
 <div class="mybox" id="bucket-list">
