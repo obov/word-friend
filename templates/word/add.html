@@ -1,15 +1,16 @@
-{% extends "base.html"%} {% block content %}
-<style>
-</style>
+{% extends "base.html"%}{%block title%}Add a Word{%endblock%} {% block content %}
+
 <div class="pip">
   <div class="form-floating mb-3" styl="padding">
     <input type="email" class="form-control" id="searchInput" placeholder="name@example.com">
     <label for="floatingInput">단어를 입력해주세요!</label>
+    <!-- <div style="border: solid 1px darkblue" class="pagation-btns">
+      <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-up"></i></div>
+      <div style="border: solid 1px chocolate" class="page">1</div>
+      <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-down"></i></div>
+    </div> -->
   </div>
-
-
   <div class="accordion accordion-flush" id="list_word">
   </div>
-
 </div>
 {%endblock%}

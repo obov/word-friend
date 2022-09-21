@@ -18,6 +18,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  border-radius: 16px;
 }
 .home > div > .words .wrapper {
   flex: 1;
@@ -31,9 +32,10 @@
   justify-content: center;
   align-items: center;
   background-color: white;
+  border-radius: 30px;
   height: 90%;
   width: 90%;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-weight: 900;
   font-size: 60px;
   cursor: pointer;
@@ -87,13 +89,15 @@
   right: calc(50% - 200px);
   bottom: 15%;
   background-color: rgb(20, 20, 60);
-  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
   transition: all 0.35s;
 }
-.plus-button:hover {
+.plus-button:hover,
+.plus-button:focus {
   color: white;
   text-shadow: 0px 0px 4px white;
-  box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgb(40, 40, 120, 0.5);
+  background-color: rgb(40, 40, 120);
 }
 .plus-button > a > i {
   color: white;

@@ -1,0 +1,97 @@
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  gap: 12px;
+}
+.auth-page .btns-wrapper {
+  display: flex;
+  gap: 12px;
+}
+.auth-page .btns-wrapper label {
+  width: 96px;
+  height: 32px;
+  padding-bottom: 4px;
+  position: relative;
+  font-size: 24px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  color: rgb(60, 60, 60);
+}
+.auth-page .btns-wrapper label:has(.indicator.checked) {
+  color: rgb(40, 40, 120);
+}
+.auth-page .btns-wrapper label .indicator {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  border-radius: 20px;
+  border: solid 4px transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.auth-page .btns-wrapper label .indicator.checked {
+  width: 100%;
+  height: 100%;
+  border: solid 4px rgb(40, 40, 120);
+}
+.auth-page > input {
+  display: none;
+}
+.auth-page > input:checked + div {
+  display: flex;
+}
+.auth-page .login,
+.auth-page .signup {
+  display: none;
+  width: 95%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60%;
+}
+.auth-page .login form,
+.auth-page .signup form {
+  border-radius: 30px;
+  padding-top: 32px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+}
+.auth-page .login form .wrapper,
+.auth-page .signup form .wrapper {
+  position: relative;
+}
+
+.auth-page .login form .wrapper input,
+.auth-page .signup form .wrapper input {
+  width: 200px;
+  height: 28px;
+}
+.auth-page .login form .wrapper label,
+.auth-page .signup form .wrapper label {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  transform: translateY(50%);
+  transition: all 0.3s;
+}
+.auth-page .login form .wrapper input:focus + label,
+.auth-page .signup form .wrapper input:focus + label {
+  left: 3px;
+  transform: translateY(calc(-100% - 6px));
+}
+/* .auth-page .signup form .inputs{
+    fle
+} */

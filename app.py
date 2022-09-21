@@ -27,11 +27,11 @@ def home():
         words_for_data = '-'.join(word['value'] for word in words)
         return render_template('index.html',words=words,words_for_data=words_for_data)
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/auth')
+def auth():
+    return render_template('auth.html')
 
 @app.route('/signup')
 def signup():
@@ -43,7 +43,7 @@ def add():
     if logindata == 'login':
         return render_template('/word/add.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
 @app.route('/word/exam')
 def exam():
@@ -51,7 +51,7 @@ def exam():
     if logindata == 'login':
         return render_template('/word/exam.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
 @app.route('/word/added_list')
 def added_list():
@@ -59,7 +59,7 @@ def added_list():
     if logindata == 'login':
         return render_template('/word/added_list.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
 
 
 def isEnglishOrKorean(input_s):
@@ -241,7 +241,56 @@ def  sign_up():
         return jsonify({'msg': '회원가입 완료! 로그인 해주세요!'})
     except:
         return jsonify({'msg': '회원가입에 실패하였습니다. 관리자에게 문의해주세요'})
-    
+
+
+@app.route('/')
+def test():
+    return render_template('test.html')
+
+#뜻 보이기
+@app.route("/test/showmean", methods=["POST"])
+def show_mean():
+    num_receive = request.form['num_give']
+    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 1}})
+    return jsonify({'msg': '뜻 확인'})
+
+#테스트 패스
+@app.route("/test/pass", methods=["POST"])
+def test_pass():
+    num_receive = request.form['num_give']
+    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
+    db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.value.update_one({'num': int(num_receive)+1}, {'$set': {'show': 0}})
+    return jsonify({'msg': 'pass'})
+
+#테스트 페일
+@app.route("/test/fail", methods=["POST"])
+def test_fail():
+    num_receive = request.form['num_give']
+    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
+    db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.value.update_one({'num': int(num_receive) + 1}, {'$set': {'show': 0}})
+    return jsonify({'msg': 'fail'})
+
+#시험 준비상태
+@app.route("/test", methods=["POST"])
+def test_ready():
+
+    for i in range(13):
+        db.value.update_one({'done':1},{'$set': {'done': 0}})
+        db.value.update_one({'num':i},{'$set': {'testnum': random.randint(1,13)}})
+        db.value.update_one({'show':0},{'$set': {'show': 1}})
+    db.value.update_one({'num': 1},{'$set': {'show': 0}})
+
+
+    return jsonify({'msg': '준비완료'})
+
+#단어리스트
+@app.route("/test", methods=["GET"])
+def test_get():
+    value_list = list(db.value.find({}, {'_id': False}))
+    return jsonify({'tests': value_list})
+
 
 
 if __name__ == '__main__':
