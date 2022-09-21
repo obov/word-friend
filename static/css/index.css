@@ -87,13 +87,15 @@
   right: calc(50% - 200px);
   bottom: 15%;
   background-color: rgb(20, 20, 60);
-  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
   transition: all 0.35s;
 }
-.plus-button:hover {
+.plus-button:hover,
+.plus-button:focus {
   color: white;
   text-shadow: 0px 0px 4px white;
-  box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgb(40, 40, 120, 0.5);
+  background-color: rgb(40, 40, 120);
 }
 .plus-button > a > i {
   color: white;

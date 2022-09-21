@@ -44,27 +44,45 @@ body > .wrapper > .header {
   z-index: 2;
 }
 body > .wrapper > .header > * {
-  width: 50px;
-  height: 50px;
 }
 body > .wrapper > .header .logo {
-  display: block;
+  width: 160px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px transparent;
+  transition: all 0.3s;
+}
+body > .wrapper > .header .logo:hover,
+body > .wrapper > .header .logo:focus {
+  border: solid 2px white;
+  text-shadow: 0px 0px 3px white;
 }
 body > .wrapper > .header .logo > a {
   color: white;
+  font-size: 20px;
+  font-weight: 800;
 }
 body > .wrapper > .header .menu-toggle {
-  padding: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 28px;
-  transition: all 0.5s;
+  border: solid 2px transparent;
+  transition: all 0.3s;
 }
-body > .wrapper > .header .menu-toggle:hover {
+body > .wrapper > .header .menu-toggle:hover,
+body > .wrapper > .header .menu-toggle:focus {
   text-shadow: 0px 0px 3px white;
+  border: solid 2px white;
 }
 body > .wrapper > .header .menu-toggle i {
   cursor: pointer;
@@ -87,9 +105,9 @@ main {
 .menu {
   background-color: white;
   height: 700px;
-  width: 240px;
+  width: 300px;
   position: fixed;
-  right: -240px;
+  right: -300px;
   top: 0px;
   transition: all 0.5s;
   z-index: 3;
@@ -98,18 +116,26 @@ main {
   display: block;
   color: white;
   font-size: 28px;
-  height: 48px;
+  height: 64px;
   background-color: rgb(20, 20, 60);
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 .menu .menu-header label {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  padding: 8px;
   margin-right: 12px;
   cursor: pointer;
+  transition: all 0.3s;
+  border: solid 2px transparent;
 }
-.menu .menu-header label:hover {
+.menu .menu-header label:hover,
+.menu .menu-header label:focus {
   text-shadow: 0px 0px 3px white;
+  border: solid 2px white;
 }
 
 .menu ul {
@@ -121,20 +147,31 @@ main {
   gap: 8px;
 }
 .menu ul li {
-  line-height: 24px;
-  padding: 5px;
+  line-height: 36px;
+  padding: 12px;
   min-width: 70%;
   margin: 0 20px;
-  font-size: 24px;
+  border-radius: 12px;
+  font-size: 36px;
   font-weight: 900;
   transition: all 0.5s;
-  border: solid 1px transparent;
+  border: solid 2px transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgb(90, 90, 90);
 }
-.menu ul li:hover {
-  border: solid 1px black;
+.menu ul li:hover,
+.menu ul li:focus {
+  border: solid 2px black;
+  color: rgb(15, 15, 15);
+}
+.menu ul li > a {
+  color: rgb(90, 90, 90);
+}
+.menu ul li:hover > a,
+.menu ul li:focus > a {
+  color: rgb(15, 15, 15);
 }
 .menu ul .logout {
   cursor: pointer;
@@ -152,6 +189,6 @@ main {
   }
   .menu-checkbox:checked + .menu {
     right: 50%;
-    transform: translateX(calc(50% + 70px));
+    transform: translateX(calc(50% + 40px));
   }
 } ;

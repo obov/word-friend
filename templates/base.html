@@ -12,12 +12,12 @@
     ></script>
     <script src="{{ url_for('static', filename='js/account.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-    <title>word friend</title>
+    <title>{% block title %} {% endblock %} | word friend</title>
   </head>
   <body>
     <div class="wrapper">
       <div class="header">
-        <div style="border: solid 1px greenyellow" class="logo"><a href="/">logo</a></div>
+        <div class="logo"><a href="/">Word Friend</a></div>
         <label class="menu-toggle" for="menuToggle"><i class="bi bi-list"></i></label>
       </div>
       <main>{% block content %} {% endblock %}</main>
