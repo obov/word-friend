@@ -113,14 +113,15 @@
                 data: {},
                 success: function (response) {
                     let rows = response['tests']
-                    for (let i = 0; i < rows.length; i++) {
+                    for (let i = 0; i < 10; i++) {
                         let value = rows[i]['value']
                         let num = rows[i]['num']
                         let mean = rows[i]['mean']
                         let done = rows[i]['done']
+                        let show = rows[i]['show']
 
                         let temp_html = ``
-                        if (done == 0) {
+                        if (done == 0 && show == 0) {
                             temp_html = `<div class="mybucket">
                                             <div class="numbox">
                                                 <h5>${num}/10</h5>
@@ -130,7 +131,8 @@
                                                 <button class="meanbox" onclick="show_mean(${num})">뜻 확인</button>
                                             </div>
                                         </div>`
-                        } else {
+                        }
+                        else if (done == 1 && show == 0) {
                             temp_html = ` <div class="mybucket">
                                             <div class="numbox">
                                                 <h5>${num}/10</h5>
@@ -138,13 +140,16 @@
                                             <div class="testbox">
                                                 <h1>${mean}</h1>
                                                 <div class="buttonbox">
-                                                    <button class="meanbox" onclick="test_pass()">pass</button>
-                                                    <button class="meanbox" onclick="test_fail()">fail</button>
+                                                    <button class="meanbox" onclick="test_pass(${num})">pass</button>
+                                                    <button class="meanbox" onclick="test_fail(${num})">fail</button>
                                                 </div>
                                             </div>
                                         </div>`
                         }
+                        else {
+                        }
                         $('#bucket-list').append(temp_html)
+
                     }
                 }
             });
@@ -164,35 +169,11 @@
             });
         }
 
-        function done_bucket(num) {
-            $.ajax({
-                type: "POST",
-                url: "/bucket/done",
-                data: {num_give: num},
-                success: function (response) {
-                    alert(response["msg"])
-                    window.location.reload()
-                }
-            });
-        }
-
-        function cancel_bucket(num) {
-            $.ajax({
-                type: "POST",
-                url: "/bucket/cancel",
-                data: {num_give: num},
-                success: function (response) {
-                    alert(response["msg"])
-                    window.location.reload()
-                }
-            });
-        }
-
         function test_pass(num) {
             $.ajax({
                 type: "POST",
                 url: "/test/pass",
-                data: {num_give: num},
+                data: {num_give: num },
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -204,7 +185,7 @@
             $.ajax({
                 type: "POST",
                 url: "/test/fail",
-                data: {num_give: num},
+                data: {num_give: num },
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
