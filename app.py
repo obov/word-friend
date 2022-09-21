@@ -244,7 +244,7 @@ def test_fail():
     db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
     return jsonify({'msg': 'fail'})
 
-#단어리스
+#단어리스트
 @app.route("/test", methods=["GET"])
 def test_get():
     value_list = list(db.value.find({}, {'_id': False}))
