@@ -38,8 +38,8 @@
   transition: all 0.3s;
 }
 .auth-page .btns-wrapper label .indicator.checked {
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
   border: solid 4px rgb(40, 40, 120);
 }
 .auth-page > input {
@@ -57,8 +57,7 @@
   align-items: center;
   height: 60%;
 }
-.auth-page .login form,
-.auth-page .signup form {
+.auth-page form {
   border-radius: 30px;
   padding-top: 32px;
   width: 100%;
@@ -67,31 +66,76 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 32px;
+  gap: 64px;
 }
-.auth-page .login form .wrapper,
-.auth-page .signup form .wrapper {
+.auth-page form .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  gap: 38px;
+}
+.auth-page form .inputs .wrapper {
   position: relative;
 }
 
-.auth-page .login form .wrapper input,
-.auth-page .signup form .wrapper input {
-  width: 200px;
+.auth-page form .inputs .wrapper input {
+  width: 260px;
   height: 28px;
+  border: none;
+  padding: 0 0 6px 12px;
+  border-bottom: solid 2px rgb(20, 20, 60);
+  font-size: 24px;
+  border-radius: 0;
 }
-.auth-page .login form .wrapper label,
-.auth-page .signup form .wrapper label {
+.auth-page form .inputs .wrapper label {
+  font-weight: 600;
   position: absolute;
   left: 12px;
   top: 0;
   transform: translateY(50%);
-  transition: all 0.3s;
+  transition: all 0.2s;
+  font-size: 18px;
+  color: rgb(20, 20, 60);
 }
-.auth-page .login form .wrapper input:focus + label,
-.auth-page .signup form .wrapper input:focus + label {
+.auth-page form .inputs .wrapper input:focus {
+  outline: none;
+}
+.auth-page form .inputs .wrapper input:focus + label,
+.auth-page form .inputs .wrapper input:valid + label {
+  font-size: 14px;
   left: 3px;
-  transform: translateY(calc(-100% - 6px));
+  transform: translateY(calc(-100% - 8px));
 }
-/* .auth-page .signup form .inputs{
-    fle
-} */
+.auth-page form .buttons {
+  display: flex;
+  height: 40px;
+  gap: 20px;
+}
+.auth-page form .buttons .cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 120px;
+  font-size: 20px;
+  font-weight: 800;
+  color: rgb(20, 20, 60);
+  border-radius: 12px;
+  border: solid 4px rgb(20, 20, 60);
+  background-color: white;
+}
+.auth-page form .buttons .ok {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 120px;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(20, 20, 60);
+}
