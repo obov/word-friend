@@ -1,7 +1,7 @@
 function send_keyword() {
   let keyword = $("#searchInput").val();
   $.ajax({
-    type: "POST",
+    type: "GET",
     url: "/search_word",
     async: false,
     data: {
@@ -14,36 +14,46 @@ function send_keyword() {
                 `;
         $(".list_word").append(temp);
       } else {
-        // const { data } = response;
-        // appendList({
-        //   data,
-        //   selector: ".list_word",
-        //   forCallBack: function ({ word, href, intend }) {
-        //     return `<li>
-        //       <a onclick="dd()">${word}</a>
-        //       <span>${intend}</span>
-        //     </li>`;
-        //   },
-        // });
-        let words = response.data;
-        for (let i = 0; i < words.length; i++) {
-          let word = words[i].word;
-          let href = words[i].href;
-          let intend = words[i].intend;
-          let temp = `
-                <li><a onclick='dd()'>${word}</a><span>${intend}</span></li>
+        const { data } = response;
+        
+        appendList({
+          data,
+          selector: "#list_word",
+          forCallBack: function ({ word, intend , index}) {
+            
+            return `
+            <div href="#" onclick="insert_word('${keyword}','${index}')" class="kwd">
+              <li class="item" data-keyword="${word}">
+                <span class="fix"><strong class="mark" >${word} </strong></br><div>${intend}</div></span>
+              </li>
+            </div></br>
             `;
-          $(".list_word").append(temp);
-        }
+          },
+        });
       }
     },
   });
 }
 
+
+function insert_word(formdata,index){
+  
+  $.ajax({
+    type: "post",
+    url: "/insert_word",
+    async: false,
+    data: {
+      'formdata':formdata,
+      'index':index
+    },
+    success: function (response) {
+      alert(response.msg);
+
+    }
+  });
+}
+
 $(document).ready(function () {
-  // $('#keyword').blur(function () {
-  //     $('.list_word').empty();
-  // });
 
   //키업 딜레이
   var itcdelay = (function () {
@@ -58,8 +68,9 @@ $(document).ready(function () {
   //키보드 입력 감지
   $("#searchInput").keyup(function () {
     itcdelay(function () {
-      $(".list_word").empty();
+      $("#list_word").empty();
       send_keyword();
     }, 180);
   });
+  
 });

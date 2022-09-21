@@ -1,12 +1,12 @@
-.add {
+/* .add {
   height: 50vh;
-  display: flex;
+  display: flow-root;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .add .search-result {
-  width: calc(100% - 40px);
+  width: calc(100%);
   height: 100%;
   padding: 20px;
   display: flex;
@@ -25,3 +25,17 @@
   justify-content: center;
   align-items: center;
 }
+
+.item {
+  margin:100px;
+  outline: 1px solid black;
+  display: block;
+  color: black;
+  width: 400px;
+  font-size: 20px;
+  font-weight: bolder !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
+

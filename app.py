@@ -5,7 +5,6 @@ import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import hashlib
-import json
 import jwt
 
 #db 접속
@@ -63,19 +62,25 @@ def added_list():
         return redirect(url_for('login'))
 
 
-#자동완성
-@app.route("/search_word",methods=["post"])
-def search_word():
+def isEnglishOrKorean(input_s):
+    k_count = 0
+    e_count = 0
+    for c in input_s:
+        if ord('가') <= ord(c) <= ord('힣'):
+            k_count+=1
+        elif ord('a') <= ord(c.lower()) <= ord('z'):
+            e_count+=1
+    return "한국어" if k_count>e_count else "영어"
 
-    keyword = request.form['keyword']
-    #크롤링
-    #https://dic.daum.net/search.do?q=apple&dic=eng&search_first=Y
+
+#테스트
+def bs4(keyword):
     if keyword.isalpha():
         try:    
             doc=[]
             data = requests.get("https://dic.daum.net/search.do?q="+keyword+"&dic=eng&search_first=Y", headers=headers)
             soup = BeautifulSoup(data.text, 'html.parser')
-
+            index =0
             #정확한 단어
             cleanword = soup.find('a',{'class','txt_cleansch'}).text
             clean_href = soup.find('a',{'class','txt_cleansch'})['href']
@@ -84,47 +89,86 @@ def search_word():
             doc.append({
                 'word' : cleanword,
                 'href' : clean_href,
-                'intend' : clean_intend
+                'intend' : clean_intend,
+                'index' : index
             })
             #연관 검색어
             data2 = soup.select('#mArticle > div.search_cont > div:nth-child(3) > div:nth-child(3) > div')
-            
             for words in data2:
                 word = words.select_one('strong > a').text
                 intend = words.select_one('ul').text
                 href = words.select_one('strong > a')['href']
-
+                index +=1
                 doc.append({
                     'word' : word,
                     'intend' : intend,
-                    'href' : href
+                    'href' : href,
+                    'index' : index
                 })
 
+             
             return jsonify({'data':doc})
         except:
             return jsonify({'data':'검색 결과가 없습니다.'})
 
     else:   
         try: 
+            
             data = requests.get("https://dic.daum.net/search.do?q="+keyword+"&dic=eng", headers=headers)
             soup = BeautifulSoup(data.text, 'html.parser')
             data = soup.select('#mArticle > div.search_cont > div:nth-child(4) > div.search_box > div')
             doc=[]
+            index = 0
             for search in data:
                 word = search.select_one('div.search_word > strong > a').text
                 href = search.select_one('div.search_word > strong > a')['href']
                 intend = search.select_one('ul').text
-                print(word,href,intend)
+                index += 1
                 doc.append({
                     'word':word,
                     'href':href,
-                    'intend':intend
+                    'intend':intend,
+                    'index' : index
                 })
             return jsonify({'data':doc})
         except:   
             return jsonify({'data':'검색 결과가 없습니다.'})
 
-#로그인 api (session)
+#자동완성
+@app.route("/search_word",methods=["get"])
+def search_word():
+    keyword = request.args.get('keyword')
+    result = bs4(keyword).get_json()
+    return result
+   
+#토큰 확인 후 db 저장
+@app.route("/insert_word",methods=["post"])
+def insert_word():
+    keyword = request.form['formdata']
+    index = request.form['index']
+    results = bs4(keyword).get_json()
+    token = request.cookies.get('mytoken')
+    
+    for result in results['data']:
+        if index == str(result['index']):
+            keyword = result['word']
+            doc = {
+                'token':token,
+                'word':result['word'],
+                'intend':result['intend']
+            }
+            break
+
+    result = db.favorites.find_one({'token': token,'word':keyword})
+        
+    if result is not None:
+        return jsonify({'msg':f"이미 등록한 단어입니다!"})
+    else : db.favorites.insert_one(doc)
+
+    print(doc, keyword)
+    return jsonify({'msg':f"{keyword} 저장 성공!"})
+
+#로그인 api (jwt)
 @app.route("/login",methods=["post"])
 def log_in():
     input_data = request.get_json()
