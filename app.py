@@ -25,19 +25,19 @@ SECRET_KEY = 'tkaruqtkf159159'
 def home():
     logindata = login_check().get_json()['loginData']
     if logindata == 'login':
-        words = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
-        words_for_data = '-'.join(word['value'] for word in words)
-        return render_template('index.html',words=words,words_for_data=words_for_data)
+        fav = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_fav = '-'.join(word['value'] for word in fav)
+        recent = [{'value' :'I','favorite':False,'complete':True},{'value' :'am','favorite':False,'complete':True},{'value' :'fine','favorite':True,'complete':False},{'value' :'thank','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_recent = '-'.join(word['value'] for word in recent)
+        recap = [{'value' :'and','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_recap = '-'.join(word['value'] for word in recap)
+        return render_template('index.html',words_for_fav=words_for_fav,words_for_recent=words_for_recent,words_for_recap=words_for_recap)
     else :
         return redirect(url_for('auth'))
     
 @app.route('/auth')
 def auth():
     return render_template('auth.html')
-
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/word/add',endpoint="add")
 def add():

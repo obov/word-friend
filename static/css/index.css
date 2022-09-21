@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 12px;
 }
 .home > div {
   width: 450px;
@@ -13,7 +14,7 @@
   position: relative;
   background-color: rgba(240, 240, 240);
   width: 300%;
-  height: 160px;
+  height: 180px;
   left: -100%;
   display: flex;
   justify-content: space-evenly;
@@ -33,11 +34,12 @@
   align-items: center;
   background-color: white;
   border-radius: 30px;
-  height: 90%;
+  height: 85%;
   width: 90%;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   font-weight: 900;
   font-size: 60px;
+  transition: all 0.3s;
   cursor: grab;
 }
 .home > div > .words .cards:active {

@@ -37,6 +37,7 @@ const wordSlider = function (part) {
 
   const dragStart = function (e) {
     e.preventDefault();
+    isDragStarts = true;
     if (e.type == "touchstart") {
       $(document).off("mousedown", dragStart);
       startPoint = e.originalEvent.touches[0].pageX;
@@ -44,7 +45,23 @@ const wordSlider = function (part) {
       startPoint = e.pageX;
     }
     words().on("touchmove mousemove", dragMove);
+    showingCard().css("transform", "scale(0.8)");
+    showingCard().css("box-shadow", "2px 2px 4px rgba(0, 0, 0, 0.7)");
   };
+
+  const mouseMovesThisPercent = (percent) => Math.abs(dragDist) > percent;
+  const checkMovePercent = () => (dragDist = ((movePoint - startPoint) / $("#favorite").width()) * 100);
+  const moveWordsAsMouseMoves = () => words().css("left", dragDist - 100 + "%");
+  const preventTooManyCall = () => (isMovable = false);
+  const animateWords = () => {
+    words().css("transition", "all 0.3s");
+    words().css("left", `${dragDist > 0 ? 0 : -200}%`);
+  };
+  const refreshWords = () => {
+    words().css("transition", "none");
+    words().css("left", "-100%");
+  };
+  const indexChange = () => (showIndex = cycle(showIndex + (dragDist < 0 ? 1 : -1)));
 
   function dragMove(e) {
     if (e.type == "touchmove") {
@@ -53,42 +70,28 @@ const wordSlider = function (part) {
       movePoint = e.pageX;
     }
     isMovingNow = true;
-
     if (isMovable) {
-      dragDist = ((movePoint - startPoint) / $("#favorite").width()) * 100;
-      if (dragDist < 0) {
-        words().css("left", dragDist - 100 + "%");
-        if (dragDist < -20) {
-          isMovable = false;
-          words().css("transition", "all 0.3s");
-          words().css("left", "-200%");
-          setTimeout(function () {
-            words().css("transition", "none");
-            words().css("left", "-100%");
-            showIndex = cycle(showIndex + 1);
-            insertValuesOnCards();
-          }, 300);
-        }
-      }
-      if (dragDist > 0) {
-        words().css("left", dragDist - 100 + "%");
-        if (dragDist > 20) {
-          isMovable = false;
-          words().css("transition", "all 0.3s");
-          words().css("left", "0");
-          setTimeout(function () {
-            words().css("transition", "none");
-            words().css("left", "-100%");
-            showIndex = cycle(showIndex - 1);
-            insertValuesOnCards();
-          }, 300);
-        }
+      checkMovePercent();
+      moveWordsAsMouseMoves();
+      if (mouseMovesThisPercent(25)) {
+        preventTooManyCall();
+        animateWords();
+        indexChange();
+
+        showingCard().css("transform", "scale(1)");
+        showingCard().css("box-shadow", "2px 2px 8px rgba(0, 0, 0, 0.3)");
+        setTimeout(function () {
+          refreshWords();
+          insertValuesOnCards();
+        }, 300);
       }
     }
   }
   const dragEnd = function (e) {
     e.preventDefault();
     words().off("touchmove mousemove", dragMove);
+    showingCard().css("transform", "scale(1)");
+    showingCard().css("box-shadow", "2px 2px 8px rgba(0, 0, 0, 0.3)");
     isMovingNow = false;
     if (Math.abs(dragDist) < 20) {
       words().css("transition", "all 0.3s");
@@ -105,6 +108,7 @@ const wordSlider = function (part) {
   words().on("touchstart mousedown", dragStart);
   words().on("touchend mouseup", dragEnd);
 };
+
 const whenHomeOpened = function () {
   wordSlider("favorite");
   wordSlider("recent");
