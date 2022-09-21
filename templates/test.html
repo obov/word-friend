@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <title>인생 버킷리스트</title>
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mybox {
+            width: 95%;
+            max-width: 700px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px lightblue;
+            margin: 20px auto;
+        }
+
+        .numbox {
+            box-shadow: 0px 0px 10px 0px lightblue;
+            padding: 10px;
+            margin-bottom: 200px;
+        }
+
+        .testbox {
+            margin: 100px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px lightblue;
+            width: 90%;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+
+        .meanbox {
+            margin: 20px;
+            width: 100px;
+            font-size: 20px;
+        }
+
+        .mybucket {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mybucket > input {
+            width: 70%;
+        }
+
+        .mybox > li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 10px;
+            min-height: 48px;
+        }
+
+        .mybox > li > h2 {
+            max-width: 75%;
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: auto;
+            margin-bottom: 0px;
+        }
+
+        .mybox > li > h2.done {
+            text-decoration: line-through
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            start_test();
+        });
+
+
+        function show_mean(num) {
+            $.ajax({
+                type: "POST",
+                url: "/test/showmean",
+                data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+
+        function start_test() {
+            $.ajax({
+                type: "GET",
+                url: "/test",
+                data: {},
+                success: function (response) {
+                    let rows = response['tests']
+                    for (let i = 0; i < 10; i++) {
+                        let value = rows[i]['value']
+                        let num = rows[i]['num']
+                        let mean = rows[i]['mean']
+                        let done = rows[i]['done']
+                        let show = rows[i]['show']
+
+                        let temp_html = ``
+                        if (done == 0 && show == 0) {
+                            temp_html = `<div class="mybucket">
+                                            <div class="numbox">
+                                                <h5>${num}/10</h5>
+                                            </div>
+                                            <div class="testbox">
+                                                <h1>${value}</h1>
+                                                <button class="meanbox" onclick="show_mean(${num})">뜻 확인</button>
+                                            </div>
+                                        </div>`
+                        }
+                        else if (done == 1 && show == 0) {
+                            temp_html = ` <div class="mybucket">
+                                            <div class="numbox">
+                                                <h5>${num}/10</h5>
+                                            </div>
+                                            <div class="testbox">
+                                                <h1>${mean}</h1>
+                                                <div class="buttonbox">
+                                                    <button class="meanbox" onclick="test_pass(${num})">pass</button>
+                                                    <button class="meanbox" onclick="test_fail(${num})">fail</button>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        }
+                        else {
+                        }
+                        $('#bucket-list').append(temp_html)
+
+                    }
+                }
+            });
+        }
+
+        function save_value() {
+            let value = $('#value').val()
+            let mean = $('#mean').val()
+            $.ajax({
+                type: "POST",
+                url: "/value",
+                data: {value_give: value,mean_give: mean},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function test_pass(num) {
+            $.ajax({
+                type: "POST",
+                url: "/test/pass",
+                data: {num_give: num },
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function test_fail(num) {
+            $.ajax({
+                type: "POST",
+                url: "/test/fail",
+                data: {num_give: num },
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="mybox">
+    <div class="mybucket">
+        <input id="value" class="form-control" type="text" placeholder="단어 입력">
+        <input id="mean" class="form-control" type="text" placeholder="뜻 입력">
+        <button onclick="save_value()" type="button" class="btn btn-outline-primary">기록하기</button>
+    </div>
+</div>
+<div class="mybox" id="bucket-list">
+
+</div>
+</body>
+</html>
