@@ -12,7 +12,7 @@ const showWordChecker = function (value, favorite, complete) {
         </div>
       </div>
       <div class="content">
-          <div class="value">${value}</div>
+          <div class="value"><span>${value}</span></div>
           <div class="btns-wrapper">
             <div id="fav" class="fav ${
               fav ? "checked" : ""

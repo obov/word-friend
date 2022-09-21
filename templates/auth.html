@@ -12,7 +12,7 @@
   </div>
   <input type="radio" name="auth" id="loginRadio" checked />
   <div class="login" id="login">
-    <form>
+    <form onsubmit="handleSubmitLogIn(event)">
       <div class="inputs">
         <div class="wrapper"><input id="logInId" type="text" required /><label for="logInId">id</label></div>
         <div class="wrapper">
@@ -20,14 +20,14 @@
         </div>
       </div>
       <div class="buttons">
-        <input type="button" class="cancel" value="cancel" />
-        <input type="button" class="ok" onclick="login()" value="ok" />
+        <input type="button" class="cancel" value="cancel" onclick="handleClickLogInCancel()" />
+        <button class="ok">ok</button>
       </div>
     </form>
   </div>
   <input type="radio" name="auth" id="signupRadio" />
   <div class="signup" id="signup">
-    <form>
+    <form onsubmit="handleSubmitSignUp(event)">
       <div class="inputs">
         <div class="wrapper"><input id="signUpId" type="text" required /><label for="signUpId">id </label></div>
         <div class="wrapper">
@@ -38,8 +38,8 @@
         </div>
       </div>
       <div class="buttons">
-        <input type="button" class="cancel" value="cancel" />
-        <input type="button" class="ok" onclick="go_signup()" value="ok" />
+        <input type="button" class="cancel" value="cancel" onclick="handleClickSignUpCancel()" />
+        <button class="ok">ok</button>
       </div>
     </form>
   </div>

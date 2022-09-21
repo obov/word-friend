@@ -25,16 +25,14 @@ const wordSlider = function (part) {
   const datasToShow = (showIndex) => [-1, 0, 1].map((e) => values[cycle(e + showIndex)]);
   const insertValuesOnCards = function () {
     cards().each(function (index, card) {
-      $(card).text(datasToShow(showIndex)[index]);
+      $(card).html(`<span>${datasToShow(showIndex)[index]}</span>`);
     });
   };
 
   showingCard().on("touchstart mousedown", function () {
     clickTime = new Date().getTime();
   });
-
   showingCard().on("touchend mouseup", handleClickShowing);
-
   insertValuesOnCards();
 
   const dragStart = function (e) {
@@ -55,6 +53,7 @@ const wordSlider = function (part) {
       movePoint = e.pageX;
     }
     isMovingNow = true;
+
     if (isMovable) {
       dragDist = ((movePoint - startPoint) / $("#favorite").width()) * 100;
       if (dragDist < 0) {

@@ -1,8 +1,8 @@
 // 로그인
 function login() {
   let jsonData = {
-    id: $("#id").val(),
-    pw: $("#password").val(),
+    id: $("#logInId").val(),
+    pw: $("#logInPassword").val(),
   };
 
   $.ajax({
@@ -29,21 +29,21 @@ function logout() {
 
 function go_signup() {
   //유효성 체크
-  let uid = $("#id").val();
-  let pw = $("#password").val();
-  let confirm = $("#confirm").val();
+  let uid = $("#signUpId").val();
+  let pw = $("#signUpPassword").val();
+  let confirm = $("#signUpConfirm").val();
 
   //id체크
   if (uid === undefined || uid === "") {
     alert("아이디를 입력하세요!");
-    $("#id").focus();
+    $("#signUpId").focus();
     return false;
   }
 
   //pw체크
   if (pw === undefined || pw === "") {
     alert("비밀번호를 입력하세요!");
-    $("#password").focus();
+    $("#signUpPassword").focus();
     return false;
   }
 
@@ -62,12 +62,12 @@ function go_signup() {
       contentType: "application/json; charset=utf-8",
       success: function (response) {
         alert(response.msg);
-        document.location.href = "/auth";
+        document.location.href = PATHNAME.AUTH;
       },
     });
   } else {
     alert("비밀번호가 일치하지 않습니다!");
-    $("#confirm").focus();
+    $("#signUpConfirm").focus();
     return false;
   }
 }

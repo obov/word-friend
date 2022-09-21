@@ -22,6 +22,7 @@
   align-items: center;
   transition: all 0.3s;
   color: rgb(60, 60, 60);
+  cursor: pointer;
 }
 .auth-page .btns-wrapper label:has(.indicator.checked) {
   color: rgb(40, 40, 120);
@@ -81,7 +82,7 @@
 }
 
 .auth-page form .inputs .wrapper input {
-  width: 260px;
+  width: 280px;
   height: 28px;
   border: none;
   padding: 0 0 6px 12px;
@@ -112,6 +113,9 @@
   display: flex;
   height: 40px;
   gap: 20px;
+}
+.auth-page form .buttons > * {
+  cursor: pointer;
 }
 .auth-page form .buttons .cancel {
   display: flex;
