@@ -199,19 +199,19 @@ def  sign_up():
         return jsonify({'msg': '회원가입에 실패하였습니다. 관리자에게 문의해주세요'})
 
 
-@app.route('/')
-def test():
-    return render_template('test.html')
+@app.route('/exam')
+def exam():
+    return render_template('exam.html')
 
 #뜻 보이기
-@app.route("/test/showmean", methods=["POST"])
-def show_mean():
+@app.route("/exam/show_intend", methods=["POST"])
+def show_intend():
     num_receive = request.form['num_give']
     db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 1}})
     return jsonify({'msg': '뜻 확인'})
 
 #테스트 패스
-@app.route("/test/pass", methods=["POST"])
+@app.route("/exam/pass", methods=["POST"])
 def test_pass():
     num_receive = request.form['num_give']
     db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
@@ -220,7 +220,7 @@ def test_pass():
     return jsonify({'msg': 'pass'})
 
 #테스트 페일
-@app.route("/test/fail", methods=["POST"])
+@app.route("/exam/fail", methods=["POST"])
 def test_fail():
     num_receive = request.form['num_give']
     db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
@@ -229,8 +229,8 @@ def test_fail():
     return jsonify({'msg': 'fail'})
 
 #시험 준비상태
-@app.route("/test", methods=["POST"])
-def test_ready():
+@app.route("/exam_ready", methods=["POST"])
+def exam_ready():
 
     for i in range(13):
         db.value.update_one({'done':1},{'$set': {'done': 0}})
@@ -242,10 +242,10 @@ def test_ready():
     return jsonify({'msg': '준비완료'})
 
 #단어리스트
-@app.route("/test", methods=["GET"])
-def test_get():
+@app.route("/exam_get", methods=["GET"])
+def exam_get():
     value_list = list(db.value.find({}, {'_id': False}))
-    return jsonify({'tests': value_list})
+    return jsonify({'exams': value_list})
 
 
 
