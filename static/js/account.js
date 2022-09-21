@@ -62,7 +62,7 @@ function go_signup() {
       contentType: "application/json; charset=utf-8",
       success: function (response) {
         alert(response.msg);
-        document.location.href = "/login";
+        document.location.href = "/auth";
       },
     });
   } else {

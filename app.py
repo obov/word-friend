@@ -28,11 +28,11 @@ def home():
         words_for_data = '-'.join(word['value'] for word in words)
         return render_template('index.html',words=words,words_for_data=words_for_data)
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/auth')
+def auth():
+    return render_template('auth.html')
 
 @app.route('/test')
 def test():
@@ -48,7 +48,7 @@ def add():
     if logindata == 'login':
         return render_template('/word/add.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
 @app.route('/word/exam')
 def exam():
@@ -56,7 +56,7 @@ def exam():
     if logindata == 'login':
         return render_template('/word/exam.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
     
 @app.route('/word/added_list')
 def added_list():
@@ -64,7 +64,7 @@ def added_list():
     if logindata == 'login':
         return render_template('/word/added_list.html')
     else :
-        return redirect(url_for('login'))
+        return redirect(url_for('auth'))
 
 
 #자동완성

@@ -1,7 +1,6 @@
 const PATHNAME = {
   HOME: "/",
-  LOGIN: "/login",
-  SIGNUP: "/signup",
+  AUTH: "/auth",
   ADD: "/word/add",
   EXAM: "/word/exam",
   ADDED_LIST: "/word/added_list",
