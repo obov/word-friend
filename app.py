@@ -84,15 +84,13 @@ def content_change():
     else:
         value = judge(like)
         db.favorites.update_one({'token': token,'word':word}, {'$set': {'like': value}})
-
-    result = db.favorites.find_one({'token':token,'word':word},{'_id': False,'intend':False})
-    print(f'성공! 외웠셈?{complete}  좋아요!:{like}')
+    
     return jsonify({'msg': '성공!'})
 
 
 
 def judge(value):
-    print(value)
+    
     if not value :
         return True
     else :
