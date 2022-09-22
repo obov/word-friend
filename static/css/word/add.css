@@ -39,3 +39,18 @@
   white-space: nowrap;
 } */
 
+.pip{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.word{
+  font-size: 25px;
+}
+
+.item {
+  list-style: none;
+  margin-bottom: 5px;
+  padding: 5px 5px 5px 5px;
+  border-bottom: 1px solid #efefef;
+}

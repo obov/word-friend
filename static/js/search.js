@@ -24,9 +24,9 @@ function send_keyword() {
             return `
             <div href="#" onclick="insert_word('${keyword}','${index}')" class="kwd">
               <li class="item" data-keyword="${word}">
-                <span class="fix"><strong class="mark" >${word} </strong></br><div>${intend}</div></span>
+                <span class="word">${word}</span></br><span class="list">${intend}</span>
               </li>
-            </div></br>
+            </div>
             `;
           },
         });

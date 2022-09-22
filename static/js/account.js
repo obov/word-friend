@@ -1,8 +1,8 @@
 // 로그인
 function login() {
   let jsonData = {
-    id: $("#id").val(),
-    pw: $("#password").val(),
+    id: $("#logInId").val(),
+    pw: $("#logInPassword").val(),
   };
 
   $.ajax({
