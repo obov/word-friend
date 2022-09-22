@@ -13,7 +13,7 @@ function send_keyword() {
           <div href="#" class="kwd">
             <li class="item">
               <span class="word">검색 결과가 없습니다.</span></br><span class="list">다른 단어를 검색해 보세요!</span>
-            </li>
+            </li> 
           </div>
                 `;
         $("#list_word").append(temp);
