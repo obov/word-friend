@@ -1,4 +1,5 @@
 const showWordChecker = function (value, favorite, complete) {
+  console.log("showword");
   const fav = typeof favorite === "boolean" ? favorite : pyBoolToJs(favorite);
   const comp = typeof complete === "boolean" ? complete : pyBoolToJs(complete);
   $("#modalPlace").append(`
@@ -12,15 +13,15 @@ const showWordChecker = function (value, favorite, complete) {
         </div>
       </div>
       <div class="content">
-          <div class="value"><span>${value}</span></div>
-          <div class="btns-wrapper">
-            <div id="fav" class="fav ${
-              fav ? "checked" : ""
-            }" onclick="handleClickFav()"><i class="bi bi-heart-fill"></i></div>
-            <div id="complete" class="complete ${
-              comp ? "checked" : ""
-            }" onclick="handleClickComplete()"><i class="bi bi-check-lg"></i></div>
-          </div>
+        <div class="value"><span>${value}</span></div>
+        <div class="btns-wrapper">
+          <div id="fav" class="fav ${
+            fav ? "checked" : ""
+          }" onclick="handleClickFav()"><i class="bi bi-heart-fill"></i></div>
+          <div id="complete" class="complete ${
+            comp ? "checked" : ""
+          }" onclick="handleClickComplete()"><i class="bi bi-check-lg"></i></div>
+        </div>
       </div>
     </div>
   `);
@@ -31,8 +32,9 @@ const showWordChecker = function (value, favorite, complete) {
     }, 500);
   });
   setTimeout(function () {
+    console.log("slide-up");
     $("#wordViewer").addClass("slide-up");
-  }, 1);
+  }, 10);
 };
 
 const handleClickWordCard = function (value, favorite, complete) {
