@@ -82,15 +82,13 @@ def content_change():
     else:
         value = judge(like)
         db.favorites.update_one({'token': token,'word':word}, {'$set': {'like': value}})
-
-    result = db.favorites.find_one({'token':token,'word':word},{'_id': False,'intend':False})
-    print(f'성공! 외웠셈?{complete}  좋아요!:{like}')
+    
     return jsonify({'msg': '성공!'})
 
 
 
 def judge(value):
-    print(value)
+    
     if not value :
         return True
     else :
@@ -197,7 +195,9 @@ def insert_word():
                 'intend':result['intend'],
                 'index' : insert_index,
                 'like':True,
-                'complete': False
+                'complete': False,
+                'done':0, 
+                'show':0
             }
             break
 
@@ -287,46 +287,47 @@ def  sign_up():
 #뜻 보이기
 @app.route("/word/exam/show_intend", methods=["POST"])
 def show_intend():
-    num_receive = request.form['num_give']
-    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 1}})
+    index_receive = request.form['index_give']
+    token = request.cookies.get('mytoken')
+    db.favorites.update_one({'index': int(index_receive),"token":token}, {'$set': {'done': 1}})
     return jsonify({'msg': '뜻 확인'})
 
 #테스트 패스
 @app.route("/word/exam/pass", methods=["POST"])
-def test_pass():
-    num_receive = request.form['num_give']
-    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
-    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
-    db.favorites.update_one({'num': int(num_receive)+1}, {'$set': {'show': 0}})
+def exam_pass():
+    index_receive = request.form['index_give']
+    token = request.cookies.get('mytoken')
+    db.favorites.update_one({'index': int(index_receive),"token":token}, {'$set': {'done': 0}})
+    db.favorites.update_one({'index': int(index_receive),"token": token},{'$set': {'show': 1}})
+    db.favorites.update_one({'index': int(index_receive) + 1, "token": token}, {'$set': {'show': 0}})
     return jsonify({'msg': 'pass'})
 
 #테스트 페일
 @app.route("/word/exam/fail", methods=["POST"])
-def test_fail():
-    num_receive = request.form['num_give']
-    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
-    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
-    db.favorites.update_one({'num': int(num_receive) + 1}, {'$set': {'show': 0}})
+def exam_fail():
+    index_receive = request.form['index_give']
+    token = request.cookies.get('mytoken')
+    db.favorites.update_one({'index': int(index_receive), "token": token}, {'$set': {'done': 0}})
+    db.favorites.update_one({'index': int(index_receive), "token": token}, {'$set': {'show': 1}})
+    db.favorites.update_one({'index': int(index_receive) + 1,"token":token}, {'$set': {'show': 0}})
     return jsonify({'msg': 'fail'})
 
 #시험 준비상태
-@app.route("/word/eaxm_ready", methods=["POST"])
+@app.route("/word/exam_ready", methods=["POST"])
 def exam_ready():
-
-    for i in range(20):
-        db.favorites.update_one({'done':1},{'$set': {'done': 0}})
-        db.favorites.update_one({'show':0},{'$set': {'show': 1}})
-        db.favorites.update_one({'num': 1},{'$set': {'show': 0}})
-
+    token = request.cookies.get('mytoken')
+    db.favorites.update_many({'done':1,"token": token}, {'$set':{'done':0}})
+    db.favorites.update_many({'show':0,"token": token}, {'$set': {'show':1}})
+    db.favorites.update_one({'index':2,"token": token}, {'$set': {'show': 0}})
 
     return jsonify({'msg': '준비완료'})
 
 #단어리스트
 @app.route("/word/exam_get", methods=["GET"])
 def exam_get():
-    value_list = list(db.favorites.find({}, {'_id': False}))
-    return jsonify({'exams': value_list})
-
+    token = request.cookies.get('mytoken')
+    words_list = list(db.favorites.find({"token":token},{"_id":False}))
+    return jsonify({'exams': words_list})
 
 
 
