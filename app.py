@@ -208,13 +208,14 @@ def insert_word():
     if result is not None:
         return jsonify({'msg':f"이미 등록한 단어입니다!"})
     else : db.favorites.insert_one(doc)
-    
     return jsonify({'msg':f"{keyword} 저장 성공!"})
 
 
 @app.route("/added_list", methods=["get"])
 def date_word():
-    words = list(db.favorites.find({}, {"_id": False}))
+    token = request.cookies.get('mytoken')
+    words = list(db.favorites.find({"token":token}, {"_id": False}))
+    print(words)
     return jsonify({"all_favorites": words})
 
 
