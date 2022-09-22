@@ -26,14 +26,12 @@ def home():
     token = request.cookies.get('mytoken')
     if logindata == 'login':
         words = list(db.favorites.find({"token":token},{"_id":False}))
-        print("words:" ,words)
-        fav = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
-        words_for_fav = '-'.join(word['word'] for word in words)
-        recent = [{'value' :'I','favorite':False,'complete':True},{'value' :'am','favorite':False,'complete':True},{'value' :'fine','favorite':True,'complete':False},{'value' :'thank','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
-        words_for_recent = '-'.join(word['value'] for word in recent)
-        recap = [{'value' :'and','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
-        words_for_recap = '-'.join(word['value'] for word in recap)
-        return render_template('index.html',words_for_fav=words_for_fav,words_for_recent=words_for_recent,words_for_recap=words_for_recap)
+        words_liked = list(db.favorites.find({"token":token,"like":True},{"_id":False}))
+        words_completed = list(db.favorites.find({"token":token,"complete":True},{"_id":False}))
+        words_for_fav ={"vals":'-'.join(word['word'] for word in words),"likes":'-'.join(str(word['like'] )for word in words),"completes":'-'.join(str(word['complete']) for word in words)}
+        words_for_like ={"vals":'-'.join(word['word'] for word in words_liked),"likes":'-'.join(str(word['like'] )for word in words_liked),"completes":'-'.join(str(word['complete']) for word in words_liked)}
+        words_for_complete ={"vals":'-'.join(word['word'] for word in words_completed),"likes":'-'.join(str(word['like'] )for word in words_completed),"completes":'-'.join(str(word['complete']) for word in words_completed)}
+        return render_template('index.html',words_for_fav=words_for_fav,words_for_like=words_for_like,words_for_complete=words_for_complete)
     else :
         return redirect(url_for('auth'))
     

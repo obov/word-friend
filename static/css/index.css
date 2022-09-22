@@ -10,6 +10,10 @@
   height: 220px;
   overflow: hidden;
 }
+.home > div h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
 .home > div > .words {
   position: relative;
   background-color: rgba(240, 240, 240);
@@ -79,13 +83,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.home .favorite {
-}
-.home .recent {
-}
-.home .recap {
 }
 
 .plus-button {
@@ -195,10 +192,10 @@
 .word-viewer .content .btns-wrapper > div {
   cursor: pointer;
 }
-.word-viewer .content .btns-wrapper .fav.checked {
+.word-viewer .content .btns-wrapper .fav i.checked {
   color: hotpink;
 }
-.word-viewer .content .btns-wrapper .complete.checked {
+.word-viewer .content .btns-wrapper .complete i.checked {
   color: chartreuse;
 }
 @media (max-width: 500px) {

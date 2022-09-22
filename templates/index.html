@@ -1,10 +1,15 @@
 {% extends "base.html"%} {%block title%}Home{%endblock%}{% block content %}
 
 <section class="home">
-  <h1>단어장입니다</h1>
   <div class="favorite" id="favorite">
-    <h2>favorite</h2>
-    <div class="words not-clickable" id="favWords" data-values="{{words_for_fav}}">
+    <h2>your words</h2>
+    <div
+      class="words not-clickable"
+      id="favWords"
+      data-values="{{words_for_fav.vals}}"
+      data-likes="{{words_for_fav.likes}}"
+      data-completes="{{words_for_fav.completes}}"
+    >
       <div class="wrapper">
         <div class="cards"></div>
       </div>
@@ -16,28 +21,40 @@
       </div>
     </div>
   </div>
-  <div class="recent" id="recent">
-    <h2>recent</h2>
-    <div class="words" id="recentWords" data-values="{{words_for_recent}}">
+  <div class="recent" id="like">
+    <h2>like</h2>
+    <div
+      class="words"
+      id="likeWords"
+      data-values="{{words_for_like.vals}}"
+      data-likes="{{words_for_like.likes}}"
+      data-completes="{{words_for_like.completes}}"
+    >
       <div class="wrapper">
         <div class="cards"></div>
       </div>
       <div class="wrapper">
-        <div class="cards cursor-grab" id="recentShowingCard"></div>
+        <div class="cards" id="likeShowingCard"></div>
       </div>
       <div class="wrapper">
         <div class="cards"></div>
       </div>
     </div>
   </div>
-  <div class="recap" id="recap">
-    <h2>recap</h2>
-    <div class="words" id="recapWords" data-values="{{words_for_recap}}">
+  <div class="recap" id="complete">
+    <h2>complete</h2>
+    <div
+      class="words"
+      id="completeWords"
+      data-values="{{words_for_complete.vals}}"
+      data-likes="{{words_for_complete.likes}}"
+      data-completes="{{words_for_complete.completes}}"
+    >
       <div class="wrapper">
         <div class="cards"></div>
       </div>
       <div class="wrapper">
-        <div class="cards cursor-grab" id="recapShowingCard"></div>
+        <div class="cards" id="completeShowingCard"></div>
       </div>
       <div class="wrapper">
         <div class="cards"></div>

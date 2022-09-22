@@ -3,10 +3,12 @@ const wordSlider = function (part) {
   const words = () => $(`#${part} > .words`);
   const showingCard = () => $(`#${part}ShowingCard`);
   const cards = () => $(`#${part} > .words .cards`);
+  const likes = words().data("likes").split("-");
+  const completes = words().data("completes").split("-");
   const handleClickShowing = function () {
     const clickTimeEnd = new Date().getTime();
     if (clickTimeEnd - clickTime < 100 && !isMovingNow) {
-      showWordChecker(showingCard().text(), true, false);
+      showWordChecker(showingCard().text(), likes[showIndex], completes[showIndex]);
     }
   };
 
@@ -15,7 +17,6 @@ const wordSlider = function (part) {
   let isMovingNow = false;
   let clickTime = 0;
   let showIndex = 0;
-
   const values = words().data("values").split("-");
   const cycleFromArr = (arr) => (number) => {
     const { length: len } = arr;
@@ -113,8 +114,8 @@ const wordSlider = function (part) {
 
 const whenHomeOpened = function () {
   wordSlider("favorite");
-  wordSlider("recent");
-  wordSlider("recap");
+  wordSlider("like");
+  wordSlider("complete");
 };
 
 // Auth animations
