@@ -1,39 +1,45 @@
 {% extends "base.html"%} {%block title%}로그인 / 회원가입{%endblock%}{% block content %}
 <section class="auth-page">
   <div class="btns-wrapper">
-    <label for="loginRadio not-clickable" onclick="handleClickLoginLabel()"
+    <label for="loginRadio" class="not-clickable" onclick="handleClickLoginLabel()"
       >login
       <div class="indicator checked" id="loginIndi"></div
     ></label>
-    <label for="signupRadio not-clickable" onclick="handleClickSignupLabel()"
+    <label for="signupRadio" class="not-clickable" onclick="handleClickSignupLabel()"
       >signup
       <div class="indicator" id="signupIndi"></div
     ></label>
   </div>
   <input type="radio" name="auth" id="loginRadio" checked />
   <div class="login" id="login">
-    <form>
-      <div class="wrapper"><input id="logInId" type="text" /><label for="logInId">id </label></div>
-      <div class="wrapper">
-        <input id="logInPassword" type="password" /><label for="logInPassword">password </label>
+    <form onsubmit="handleSubmitLogIn(event)">
+      <div class="inputs">
+        <div class="wrapper"><input id="logInId" type="text" required /><label for="logInId">id</label></div>
+        <div class="wrapper">
+          <input id="logInPassword" type="password" required /><label for="logInPassword">password</label>
+        </div>
       </div>
       <div class="buttons">
-        <input type="button" value="cancel" />
-        <input type="button" onclick="login()" value="ok" />
+        <input type="button" class="cancel" value="cancel" onclick="handleClickLogInCancel()" />
+        <button class="ok">ok</button>
       </div>
     </form>
   </div>
   <input type="radio" name="auth" id="signupRadio" />
   <div class="signup" id="signup">
-    <form>
-      <div class="wrapper"><input id="signUpId" type="text" /><label for="signUpId">id </label></div>
-      <div class="wrapper">
-        <input id="signUpPassword" type="password" /><label for="signUpPassword">password </label>
+    <form onsubmit="handleSubmitSignUp(event)">
+      <div class="inputs">
+        <div class="wrapper"><input id="signUpId" type="text" required /><label for="signUpId">id </label></div>
+        <div class="wrapper">
+          <input id="signUpPassword" type="password" required /><label for="signUpPassword">password </label>
+        </div>
+        <div class="wrapper">
+          <input id="signUpConfirm" type="password" required /><label for="signUpConfirm">confirm </label>
+        </div>
       </div>
-      <div class="wrapper"><input id="signUpConfirm" type="password" /><label for="signUpConfirm">confirm </label></div>
       <div class="buttons">
-        <input type="button" value="cancel" />
-        <input type="button" onclick="go_signup()" value="ok" />
+        <input type="button" class="cancel" value="cancel" onclick="handleClickSignUpCancel()" />
+        <button class="ok">ok</button>
       </div>
     </form>
   </div>

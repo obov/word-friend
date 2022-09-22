@@ -38,6 +38,15 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-weight: 900;
   font-size: 60px;
+  cursor: grab;
+}
+.home > div > .words .cards:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.home > div > .words .cards span {
+  padding: 16px;
   cursor: pointer;
 }
 .home > div > .word-list {
