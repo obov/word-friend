@@ -128,6 +128,6 @@ const whenAuthOpened = function () {
 if (location.pathname === PATHNAME.HOME) {
   whenHomeOpened();
 }
-if (location.pathname === PATHNAME.LOGIN) {
+if (location.pathname === PATHNAME.AUTH) {
   whenAuthOpened();
 }

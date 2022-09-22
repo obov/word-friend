@@ -185,7 +185,7 @@ main {
 }
 @media (max-width: 500px) {
   body > .wrapper > .header {
-    width: 332px;
+    width: 380px;
   }
   main {
     width: 380px;
