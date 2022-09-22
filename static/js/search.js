@@ -5,14 +5,27 @@ function send_keyword() {
     url: "/search_word",
     async: false,
     data: {
-      keyword: keyword,
+      keyword: keyword
     },
     success: function (response) {
       if (response.data === "검색 결과가 없습니다.") {
         let temp = `
-                    <li>검색 결과가 없습니다.</li>
+          <div href="#" class="kwd">
+            <li class="item">
+              <span class="word">검색 결과가 없습니다.</span></br><span class="list">다른 단어를 검색해 보세요!</span>
+            </li>
+          </div>
                 `;
-        $(".list_word").append(temp);
+        $("#list_word").append(temp);
+        
+        // const { data } = response;
+        // appendList({
+        //   data,
+        //   selector
+        // })
+
+
+
       } else {
         const { data } = response;
         
