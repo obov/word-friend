@@ -1,32 +1,76 @@
 .exam {
-  height: 20%;
+  height: 60%;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .exam .turn {
+  align-self: flex-start;
+  margin: 20px 10px;
   height: fit-content;
   width: fit-content;
   padding: 4px 10px;
+  background-color: rgb(20, 20, 60);
+  border-radius: 8px;
+  color: white;
 }
 .exam form {
+  width: 95%;
   height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  border-radius: 16px;
+  background-color: rgb(240, 240, 240);
 }
 .exam form .word {
   height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 60%;
   font-size: 30px;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 92px;
+  font-weight: 900;
 }
-.exam form .exam-button {
+.exam form .meaning {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  font-size: 30px;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 50px;
+  font-weight: 900;
+}
+.exam form .exam-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.exam form .exam-buttons > button {
+  border-radius: 12px;
+  width: 120px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  font-size: 18px;
+  font-weight: 900;
+  background-color: rgb(20, 20, 60);
+  color: white;
 }
 .exam .result {
   height: 80%;

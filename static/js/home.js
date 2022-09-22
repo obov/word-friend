@@ -1,9 +1,7 @@
 const showWordChecker = function (value, favorite, complete) {
-  
-  console.log("showword");
   const fav = typeof favorite === "boolean" ? favorite : pyBoolToJs(favorite);
   const comp = typeof complete === "boolean" ? complete : pyBoolToJs(complete);
-  
+
   $("#modalPlace").append(`
     <div id="wordViewer" class="word-viewer">
       <div class="header-wrapper">
@@ -19,10 +17,10 @@ const showWordChecker = function (value, favorite, complete) {
         <div class="btns-wrapper">
           <div id="fav" class="fav ${
             fav ? "checked" : ""
-          }" onclick="handleClickFav()"><i class="bi bi-heart-fill"></i></div>
+          }" onclick="handleClickFav(event)"><i class="bi bi-heart-fill"></i></div>
           <div id="complete" class="complete ${
             comp ? "checked" : ""
-          }" onclick="handleClickComplete()"><i class="bi bi-check-lg"></i></div>
+          }" onclick="handleClickComplete(event)"><i class="bi bi-check-lg"></i></div>
         </div>
       </div>
     </div>
@@ -31,10 +29,10 @@ const showWordChecker = function (value, favorite, complete) {
     $("#wordViewer").removeClass("slide-up");
     setTimeout(function () {
       $("#modalPlace").empty();
-    }, 500);
+      location.reload();
+    }, 200);
   });
   setTimeout(function () {
-    console.log("slide-up");
     $("#wordViewer").addClass("slide-up");
   }, 10);
 };
@@ -43,22 +41,18 @@ const handleClickWordCard = function (value, favorite, complete) {
   showWordChecker(value, favorite, complete);
 };
 
-const handleClickFav = function () {
-  console.log("click favorite");
-  let $content = $('.content');
-  let word = $content.find('span#value').text();
-  contentOnOff(word,'like');
-
-  $("#fav").toggleClass("checked");
+const handleClickFav = function (event) {
+  event.target.classList.toggle("checked");
+  let $content = $(".content");
+  let word = $content.find("span#value").text();
+  contentOnOff(word, "like");
 };
-const handleClickComplete = function () {
-  console.log("click complete");
-
-  let $content = $('.content');
-  let word = $content.find('span#value').text();
-  contentOnOff(word,'complete');
-
+const handleClickComplete = function (event) {
+  event.target.classList.toggle("checked");
+  let $content = $(".content");
+  let word = $content.find("span#value").text();
   $("#complete").toggleClass("checked");
+  contentOnOff(word, "complete");
 };
 
 // function content_type(word){
@@ -80,19 +74,17 @@ const handleClickComplete = function () {
 //   return {'like':like,'complete':complete}
 // }
 
-function contentOnOff(word,contentName){
+function contentOnOff(word, contentName) {
   $.ajax({
     type: "POST",
     url: "/content_change",
     async: false,
     data: {
-      'word':word,
-      'content':contentName
+      word: word,
+      content: contentName,
     },
     success: function (response) {
       console.log(response);
-    }
+    },
   });
 }
-
-
