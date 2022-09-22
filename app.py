@@ -24,19 +24,19 @@ SECRET_KEY = 'tkaruqtkf159159'
 def home():
     logindata = login_check().get_json()['loginData']
     if logindata == 'login':
-        words = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
-        words_for_data = '-'.join(word['value'] for word in words)
-        return render_template('index.html',words=words,words_for_data=words_for_data)
+        fav = [{'value' :'hi','favorite':False,'complete':True},{'value' :'hello','favorite':False,'complete':True},{'value' :'how','favorite':True,'complete':False},{'value' :'are','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_fav = '-'.join(word['value'] for word in fav)
+        recent = [{'value' :'I','favorite':False,'complete':True},{'value' :'am','favorite':False,'complete':True},{'value' :'fine','favorite':True,'complete':False},{'value' :'thank','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_recent = '-'.join(word['value'] for word in recent)
+        recap = [{'value' :'and','favorite':True,'complete':True},{'value' :'you','favorite':True,'complete':True}]
+        words_for_recap = '-'.join(word['value'] for word in recap)
+        return render_template('index.html',words_for_fav=words_for_fav,words_for_recent=words_for_recent,words_for_recap=words_for_recap)
     else :
         return redirect(url_for('auth'))
     
 @app.route('/auth')
 def auth():
     return render_template('auth.html')
-
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/word/add',endpoint="add")
 def add():
@@ -248,36 +248,35 @@ def  sign_up():
 @app.route("/word/exam/show_intend", methods=["POST"])
 def show_intend():
     num_receive = request.form['num_give']
-    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 1}})
+    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 1}})
     return jsonify({'msg': '뜻 확인'})
 
 #테스트 패스
 @app.route("/word/exam/pass", methods=["POST"])
 def test_pass():
     num_receive = request.form['num_give']
-    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
-    db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
-    db.value.update_one({'num': int(num_receive)+1}, {'$set': {'show': 0}})
+    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
+    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.favorites.update_one({'num': int(num_receive)+1}, {'$set': {'show': 0}})
     return jsonify({'msg': 'pass'})
 
 #테스트 페일
 @app.route("/word/exam/fail", methods=["POST"])
 def test_fail():
     num_receive = request.form['num_give']
-    db.value.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
-    db.value.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
-    db.value.update_one({'num': int(num_receive) + 1}, {'$set': {'show': 0}})
+    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
+    db.favorites.update_one({'num': int(num_receive)}, {'$set': {'show': 1}})
+    db.favorites.update_one({'num': int(num_receive) + 1}, {'$set': {'show': 0}})
     return jsonify({'msg': 'fail'})
 
 #시험 준비상태
-@app.route("/word/exam_ready", methods=["POST"])
+@app.route("/word/eaxm_ready", methods=["POST"])
 def exam_ready():
 
-    for i in range(13):
-        db.value.update_one({'done':1},{'$set': {'done': 0}})
-        db.value.update_one({'num':i},{'$set': {'testnum': random.randint(1,13)}})
-        db.value.update_one({'show':0},{'$set': {'show': 1}})
-    db.value.update_one({'num': 1},{'$set': {'show': 0}})
+    for i in range(20):
+        db.favorites.update_one({'done':1},{'$set': {'done': 0}})
+        db.favorites.update_one({'show':0},{'$set': {'show': 1}})
+    db.favorites.update_one({'num': 1},{'$set': {'show': 0}})
 
 
     return jsonify({'msg': '준비완료'})
@@ -285,8 +284,9 @@ def exam_ready():
 #단어리스트
 @app.route("/word/exam_get", methods=["GET"])
 def exam_get():
-    value_list = list(db.value.find({}, {'_id': False}))
+    value_list = list(db.favorites.find({}, {'_id': False}))
     return jsonify({'exams': value_list})
+
 
 
 

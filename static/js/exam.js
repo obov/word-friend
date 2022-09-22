@@ -1,11 +1,12 @@
 $(document).ready(function () {
     start_exam()
+    ready_exam()
 });
 
 
 function show_intend(num) {
     $.ajax({
-        type: "POST", url: "/exam/show_intend", data: {num_give: num}, success: function (response) {
+        type: "POST", url: "/word/exam/show_intend", data: {num_give: num}, success: function (response) {
             alert(response["msg"])
             window.location.reload()
         }
@@ -14,9 +15,8 @@ function show_intend(num) {
 
 function ready_exam() {
     $.ajax({
-        type: "POST", url: "/exam_ready", data: {}, success: function (response) {
-            alert(response["msg"])
-            window.location.reload()
+        type: "POST", url: "/word/exam_ready", data: {}, success: function (response) {
+
         }
     });
 }
@@ -24,7 +24,7 @@ function ready_exam() {
 
 function start_exam() {
     $.ajax({
-        type: "GET", url: "/exam_get", data: {}, success: function (response) {
+        type: "GET", url: "/word/exam_get", data: {}, success: function (response) {
             let rows = response['exams']
             for (let i = 0; i < 10; i++) {
                 let word = rows[i]['word']
@@ -66,7 +66,7 @@ function start_exam() {
         function exam_pass(num) {
             $.ajax({
                 type: "POST",
-                url: "/exam/pass",
+                url: "/word/exam/pass",
                 data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])
@@ -78,7 +78,7 @@ function start_exam() {
         function exam_fail(num) {
             $.ajax({
                 type: "POST",
-                url: "/exam/fail",
+                url: "/word/exam/fail",
                 data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])
