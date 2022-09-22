@@ -21,7 +21,7 @@ app = Flask(__name__)
 SECRET_KEY = 'tkaruqtkf159159'
 
 @app.route('/',endpoint="home")
-def home():
+def home(): 
     logindata = login_check().get_json()['loginData']
     token = request.cookies.get('mytoken')
     if logindata == 'login':
