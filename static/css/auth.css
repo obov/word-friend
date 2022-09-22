@@ -80,7 +80,6 @@
 .auth-page form .inputs .wrapper {
   position: relative;
 }
-
 .auth-page form .inputs .wrapper input {
   width: 280px;
   height: 42px;
@@ -108,6 +107,8 @@
   font-size: 14px;
   left: 3px;
   transform: translateY(calc(-100% + 4px));
+}
+.auth-page form .inputs .wrapper .is-valid {
 }
 .auth-page form .buttons {
   display: flex;

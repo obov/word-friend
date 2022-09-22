@@ -155,7 +155,7 @@ def insert_word():
     
     insert_index = 1
     index_result = db.favorites.find({'token':token})
-    
+    print("index_result : ",index_result)
     if index_result is not None:
         for indexs in index_result:
             if insert_index < indexs['index']:
@@ -290,7 +290,7 @@ def exam_ready():
     for i in range(20):
         db.favorites.update_one({'done':1},{'$set': {'done': 0}})
         db.favorites.update_one({'show':0},{'$set': {'show': 1}})
-    db.favorites.update_one({'num': 1},{'$set': {'show': 0}})
+        db.favorites.update_one({'num': 1},{'$set': {'show': 0}})
 
 
     return jsonify({'msg': '준비완료'})
