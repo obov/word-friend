@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %}Words List{% endblock %}{% block content %}
+    <script src="../../static/js/date.js"></script>
+    <section style="border: solid 3px tomato" class="added-list">
+        <div class="header">
+            <ul>
+                <li><label for="date">즐겨찾기</label></li>
+                <li><label for="frequent">자주 틀린 단어</label></li>
+                <li><label for="complete">완료</label></li>
+            </ul>
+        </div>
+        <input name="detail" checked type="radio" id="date"/>
+        <div style="border: solid 1px gold" class="added-list">
+            <div style="border: solid 1px darkblue" id="words">
+
+            </div>
+            <div style="border: solid 1px darkblue" class="pagation-btns">
+                <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+                <div style="border: solid 1px chocolate" class="page">1</div>
+                <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+            </div>
+        </div>
+        <input name="detail" type="radio" id="frequent"/>
+        <div style="border: solid 1px gold" class="ad-result">
+            <div style="border: solid 1px darkblue" class="detail">
+                <table class="dateclass">
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="border: solid 1px darkblue" class="pagation-btns">
+                <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+                <div style="border: solid 1px chocolate" class="page">1</div>
+                <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+            </div>
+        </div>
+        <input name="detail" type="radio" id="complete"/>
+        <div style="border: solid 1px gold" class="ad-result">
+            <div style="border: solid 1px darkblue" class="detail">
+                <table class="dateclass">
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">항목명</th>
+                        <td>내용이 들어갑니다.</td>
+                    </tr>
+                </table>
+                <div style="border: solid 1px darkblue" class="pagation-btns">
+                    <div style="border: solid 1px chocolate" class="up"><i class="bi bi-chevron-left"></i></div>
+                    <div style="border: solid 1px chocolate" class="page">1</div>
+                    <div style="border: solid 1px chocolate" class="down"><i class="bi bi-chevron-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

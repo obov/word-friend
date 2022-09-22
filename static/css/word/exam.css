@@ -1,0 +1,52 @@
+.exam {
+  height: 20%;
+  margin-bottom: 20px;
+}
+.exam .turn {
+  height: fit-content;
+  width: fit-content;
+  padding: 4px 10px;
+}
+.exam form {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.exam form .word {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 50px;
+}
+.exam form .exam-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.exam .result {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.exam .result h2 {
+  font-size: 20px;
+}
+.exam .result .score {
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  font-size: 50px;
+}
+.exam .result .cheering-ment {
+  font-size: 36px;
+}

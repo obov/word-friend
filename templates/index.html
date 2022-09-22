@@ -1,70 +1,52 @@
-{% extends "base.html"%} {% block content %}
+{% extends "base.html"%} {%block title%}Home{%endblock%}{% block content %}
 
-<div class="main">
+<section class="home">
   <h1>단어장입니다</h1>
-  <div class="favorite">
+  <div class="favorite" id="favorite">
     <h2>favorite</h2>
-    <ul class="word-list">
-      <li>
-        <div>hi</div>
-      </li>
-      <li>
-        <div>hello</div>
-      </li>
-      <li>
-        <div>how</div>
-      </li>
-      <li>
-        <div>are</div>
-      </li>
-      <li>
-        <div>you</div>
-      </li>
-    </ul>
+    <div class="words not-clickable" id="favWords" data-values="{{words_for_fav}}">
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards" id="favoriteShowingCard"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+    </div>
   </div>
-  <div class="recent">
+  <div class="recent" id="recent">
     <h2>recent</h2>
-    <ul class="word-list">
-      <li>
-        <div>hi</div>
-      </li>
-      <li>
-        <div>hello</div>
-      </li>
-      <li>
-        <div>how</div>
-      </li>
-      <li>
-        <div>are</div>
-      </li>
-      <li>
-        <div>you</div>
-      </li>
-    </ul>
+    <div class="words" id="recentWords" data-values="{{words_for_recent}}">
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards cursor-grab" id="recentShowingCard"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+    </div>
   </div>
-  <div class="recap">
+  <div class="recap" id="recap">
     <h2>recap</h2>
-    <ul class="word-list">
-      <li>
-        <div>hi</div>
-      </li>
-      <li>
-        <div>hello</div>
-      </li>
-      <li>
-        <div>how</div>
-      </li>
-      <li>
-        <div>are</div>
-      </li>
-      <li>
-        <div>you</div>
-      </li>
-    </ul>
+    <div class="words" id="recapWords" data-values="{{words_for_recap}}">
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards cursor-grab" id="recapShowingCard"></div>
+      </div>
+      <div class="wrapper">
+        <div class="cards"></div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 <div class="plus-button">
-  <a href="/word/enlist"><i class="bi bi-plus-lg"></i></a>
+  <a href="/word/add"><i class="bi bi-plus-lg"></i></a>
 </div>
 
 {%endblock%}

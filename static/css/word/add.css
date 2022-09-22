@@ -1,0 +1,56 @@
+/* .add {
+  height: 50vh;
+  display: flow-root;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add .search-result {
+  width: calc(100%);
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add .search-result .detail {
+  height: 100%;
+  flex: 5;
+}
+.add .search-result .pagation-btns {
+  flex: 1;
+}
+.add .search-result .pagation-btns > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  margin:100px;
+  outline: 1px solid black;
+  display: block;
+  color: black;
+  width: 400px;
+  font-size: 20px;
+  font-weight: bolder !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
+
+.pip{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.word{
+  font-size: 25px;
+}
+
+.item {
+  list-style: none;
+  margin-bottom: 5px;
+  padding: 5px 5px 5px 5px;
+  border-bottom: 1px solid #efefef;
+}

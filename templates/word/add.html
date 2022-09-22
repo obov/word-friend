@@ -1,0 +1,15 @@
+{% extends "base.html"%}{%block title%}Add a Word{%endblock%} {% block content %}
+
+<div class="pip">
+  <div class="form-floating mb-3" styl="padding">
+    <input type="email" class="form-control" id="searchInput" placeholder="name@example.com">
+    <label style="font-size:15px;" for="floatingInput">단어를 입력해주세요!, 단어를 클릭하면 즐겨찾기에 추가됩니다!</label>
+
+    <div class="mb-3" style="margin-top: 20px;">
+      <div class="accordion accordion-flush" id="list_word">
+        <!--content-->
+      </div>
+    </div>
+  
+</div>
+{%endblock%}

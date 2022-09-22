@@ -1,14 +1,57 @@
-.main {
+.home {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 12px;
 }
-.main > div {
+.home > div {
   width: 450px;
   height: 220px;
+  overflow: hidden;
 }
-.main > div > .word-list {
+.home > div > .words {
+  position: relative;
+  background-color: rgba(240, 240, 240);
+  width: 300%;
+  height: 180px;
+  left: -100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 16px;
+}
+.home > div > .words .wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.home > div > .words .cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  height: 85%;
+  width: 90%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 900;
+  font-size: 60px;
+  transition: all 0.3s;
+  cursor: grab;
+}
+.home > div > .words .cards:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.home > div > .words .cards span {
+  padding: 16px;
+  cursor: pointer;
+}
+.home > div > .word-list {
   background-color: rgba(240, 240, 240);
   height: 160px;
   overflow: auto;
@@ -19,24 +62,30 @@
   justify-content: flex-start;
   align-items: center;
 }
-.main > div > .word-list li {
-}
-.main > div > .word-list li > div {
-  background-color: white;
-  font-size: 72px;
+.home > div > .word-list li > .word-card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-width: 30px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
-  padding: 20px;
+  padding: 8px;
   border-radius: 12px;
+  background-color: white;
+  cursor: pointer;
 }
-.main .favorite {
+.home > div > .word-list li > .word-card h3 {
+  font-size: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.main .recent {
+
+.home .favorite {
 }
-.main .recap {
+.home .recent {
+}
+.home .recap {
 }
 
 .plus-button {
@@ -51,15 +100,123 @@
   right: calc(50% - 200px);
   bottom: 15%;
   background-color: rgb(20, 20, 60);
-  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
   transition: all 0.35s;
 }
-.plus-button:hover {
+.plus-button:hover,
+.plus-button:focus {
   color: white;
   text-shadow: 0px 0px 4px white;
-  box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgb(40, 40, 120, 0.5);
+  background-color: rgb(40, 40, 120);
 }
 .plus-button > a > i {
   color: white;
   font-size: 28px;
 }
+.word-viewer {
+  width: 500px;
+  height: 80%;
+  background-color: white;
+  position: fixed;
+  padding-bottom: 20px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.word-viewer.slide-up {
+  top: 5px;
+}
+.word-viewer .header-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  max-height: 90px;
+}
+.word-viewer .header-wrapper .header {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(40, 40, 120);
+}
+.word-viewer .header-wrapper .header .back {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 30px;
+}
+.word-viewer .content {
+  width: 95%;
+  background-color: white;
+  flex: 5;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+  gap: 36px;
+}
+.word-viewer .content .value {
+  font-size: 144px;
+  font-weight: 900;
+}
+.word-viewer .content .btns-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  gap: 36px;
+}
+.word-viewer .content .btns-wrapper > div {
+  cursor: pointer;
+}
+.word-viewer .content .btns-wrapper .fav.checked {
+  color: hotpink;
+}
+.word-viewer .content .btns-wrapper .complete.checked {
+  color: chartreuse;
+}
+@media (max-width: 500px) {
+  .home > div {
+    width: 330px;
+    height: 220px;
+  }
+  .plus-button {
+    right: calc(50% - 150px);
+  }
+}
+
+table.addclass {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin : 20px 10px;
+}
+table.addclass th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.addclass td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
