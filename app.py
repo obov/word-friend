@@ -66,18 +66,44 @@ def added_list():
         return redirect(url_for('auth'))
 
 
-def isEnglishOrKorean(input_s):
-    k_count = 0
-    e_count = 0
-    for c in input_s:
-        if ord('가') <= ord(c) <= ord('힣'):
-            k_count+=1
-        elif ord('a') <= ord(c.lower()) <= ord('z'):
-            e_count+=1
-    return "한국어" if k_count>e_count else "영어"
+#좋아요, 완료체크 db 컬럼 값 변경
+@app.route("/content_change", methods=["POST"])
+def content_change():
+    word = request.form['word']
+    content = request.form['content']
+    token = request.cookies.get('mytoken')
+
+    result = db.favorites.find_one({'token':token,'word':word},{'_id': False,'intend':False})
+    like = result['like']
+    complete = result['complete']
+    print(f'성공! 외웠셈?{complete}  좋아요!:{like}')
+    
+    if(content == 'complete'):
+        value = judge(complete)
+        db.favorites.update_one({'token': token,'word':word}, {'$set': {'complete': value}})
+    else:
+        value = judge(like)
+        db.favorites.update_one({'token': token,'word':word}, {'$set': {'like': value}})
+
+    return jsonify({'msg': '성공!'})
 
 
-#테스트
+
+def judge(value):
+    
+    if value =="N":
+        return True
+    else :
+        return False
+
+# @app.route('/content_type', methods=["GET"])
+# def content_type():
+#     word = request.args.get('word')
+#     token = request.cookies.get('mytoken')
+#     result = db.favorites.find_one({'token':token,'word':word},{'_id': False,'intend':False,'token':False,'index':False})
+#     return jsonify({'msg': '성공!','result':result})
+
+#단어 조회 크롤링 함수
 def bs4(keyword):
     if keyword.isalpha():
         try:    
@@ -170,7 +196,8 @@ def insert_word():
                 'word':result['word'],
                 'intend':result['intend'],
                 'index' : insert_index,
-                'YN':'N'
+                'like':True,
+                'complete': False
             }
             break
 
@@ -210,7 +237,6 @@ def log_in():
 
     except:        
         return jsonify({'msg': '일치하는 계정이 없습니다.','result':'false'})
-
 
 
 #로그인체크
