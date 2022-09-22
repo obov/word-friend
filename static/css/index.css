@@ -147,14 +147,27 @@
   width: 100%;
   height: 100%;
   background-color: rgb(40, 40, 120);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .word-viewer .header-wrapper .header .back {
+  width: 40px;
+  height: 40px;
+  border: solid 2px transparent;
+  border-radius: 12px;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   font-size: 30px;
+  margin-left: 20px;
+  transition: all 0.3s;
+}
+.word-viewer .header-wrapper .header .back:hover,
+.word-viewer .header-wrapper .header .back:focus {
+  border: solid 2px white;
 }
 .word-viewer .content {
   width: 95%;

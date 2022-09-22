@@ -72,18 +72,20 @@ const wordSlider = function (part) {
     isMovingNow = true;
     if (isMovable) {
       checkMovePercent();
-      moveWordsAsMouseMoves();
-      if (mouseMovesThisPercent(25)) {
-        preventTooManyCall();
-        animateWords();
-        indexChange();
+      if (Math.abs(dragDist) > 1) {
+        moveWordsAsMouseMoves();
+        if (mouseMovesThisPercent(25)) {
+          preventTooManyCall();
+          animateWords();
+          indexChange();
 
-        showingCard().css("transform", "scale(1)");
-        showingCard().css("box-shadow", "2px 2px 8px rgba(0, 0, 0, 0.3)");
-        setTimeout(function () {
-          refreshWords();
-          insertValuesOnCards();
-        }, 300);
+          showingCard().css("transform", "scale(1)");
+          showingCard().css("box-shadow", "2px 2px 8px rgba(0, 0, 0, 0.3)");
+          setTimeout(function () {
+            refreshWords();
+            insertValuesOnCards();
+          }, 300);
+        }
       }
     }
   }
