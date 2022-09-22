@@ -1,7 +1,9 @@
 const showWordChecker = function (value, favorite, complete) {
+  
   console.log("showword");
   const fav = typeof favorite === "boolean" ? favorite : pyBoolToJs(favorite);
   const comp = typeof complete === "boolean" ? complete : pyBoolToJs(complete);
+  
   $("#modalPlace").append(`
     <div id="wordViewer" class="word-viewer">
       <div class="header-wrapper">
@@ -13,7 +15,7 @@ const showWordChecker = function (value, favorite, complete) {
         </div>
       </div>
       <div class="content">
-        <div class="value"><span>${value}</span></div>
+        <div class="value"><span id="value">${value}</span></div>
         <div class="btns-wrapper">
           <div id="fav" class="fav ${
             fav ? "checked" : ""
@@ -43,9 +45,54 @@ const handleClickWordCard = function (value, favorite, complete) {
 
 const handleClickFav = function () {
   console.log("click favorite");
+  let $content = $('.content');
+  let word = $content.find('span#value').text();
+  contentOnOff(word,'like');
+
   $("#fav").toggleClass("checked");
 };
 const handleClickComplete = function () {
   console.log("click complete");
+
+  let $content = $('.content');
+  let word = $content.find('span#value').text();
+  contentOnOff(word,'complete');
+
   $("#complete").toggleClass("checked");
 };
+
+// function content_type(word){
+
+//   let like,complete;
+
+//   $.ajax({
+//     type: "GET",
+//     url: "/content_type",
+//     async: false,
+//     data: {
+//       'word':word
+//     },
+//     success: function (response) {
+//       like = response.result['like'];
+//       complete = response.result['complete'];
+//     }
+//   });
+//   return {'like':like,'complete':complete}
+// }
+
+function contentOnOff(word,contentName){
+  $.ajax({
+    type: "POST",
+    url: "/content_change",
+    async: false,
+    data: {
+      'word':word,
+      'content':contentName
+    },
+    success: function (response) {
+      console.log(response);
+    }
+  });
+}
+
+
