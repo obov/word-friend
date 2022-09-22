@@ -149,17 +149,28 @@ def search_word():
 @app.route("/insert_word",methods=["post"])
 def insert_word():
     keyword = request.form['formdata']
-    index = request.form['index']
+    wordindex = request.form['index']
     results = bs4(keyword).get_json()
     token = request.cookies.get('mytoken')
     
+    insert_index = 1
+    index_result = db.favorites.find({'token':token})
+    
+    if index_result is not None:
+        for indexs in index_result:
+            if insert_index < indexs['index']:
+                insert_index = indexs['index']
+        insert_index += 1
+
     for result in results['data']:
-        if index == str(result['index']):
+        if wordindex == str(result['index']):
             keyword = result['word']
             doc = {
                 'token':token,
                 'word':result['word'],
-                'intend':result['intend']
+                'intend':result['intend'],
+                'index' : insert_index,
+                'YN':'N'
             }
             break
 
@@ -169,7 +180,7 @@ def insert_word():
         return jsonify({'msg':f"이미 등록한 단어입니다!"})
     else : db.favorites.insert_one(doc)
 
-    print(doc, keyword)
+    print(doc)
     return jsonify({'msg':f"{keyword} 저장 성공!"})
 
 #로그인 api (jwt)
