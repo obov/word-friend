@@ -197,7 +197,9 @@ def insert_word():
                 'intend':result['intend'],
                 'index' : insert_index,
                 'like':True,
-                'complete': False
+                'complete': False,
+                'done':0, 
+                'show':0
             }
             break
 
