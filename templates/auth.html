@@ -14,9 +14,15 @@
   <div class="login" id="login">
     <form onsubmit="handleSubmitLogIn(event)">
       <div class="inputs">
-        <div class="wrapper"><input id="logInId" type="text" required /><label for="logInId">id</label></div>
         <div class="wrapper">
-          <input id="logInPassword" type="password" required /><label for="logInPassword">password</label>
+          <input id="logInId" type="text" required />
+          <label for="logInId">id</label>
+          <div class="is-valid"></div>
+        </div>
+        <div class="wrapper">
+          <input id="logInPassword" type="password" required />
+          <label for="logInPassword">password</label>
+          <div class="is-valid"></div>
         </div>
       </div>
       <div class="buttons">

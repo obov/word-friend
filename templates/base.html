@@ -24,7 +24,7 @@
     ></script>
     <script src="{{ url_for('static', filename='js/account.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-    <script src="../../static/js/exam.js"></script>
+
     <title>{% block title %} {% endblock %} | word friend</title>
   </head>
   <body>
@@ -41,7 +41,7 @@
         </div>
         <ul>
           <li id="logout" class="logout" onclick="logout()">logout</li>
-          <li><a href="/word/exam">단어테스트</a></li>
+          <li><a href="/word/exam" onclick="ready_exam()">단어테스트</a></li>
           <li><a href="/word/added_list">등록한 단어</a></li>
         </ul>
       </div>
@@ -51,5 +51,6 @@
     <script src="../static/js/home.js"></script>
     <script src="../static/js/animation.js"></script>
     <script src="../static/js/auth.js"></script>
+    <script src="../../static/js/exam.js"></script>
   </body>
 </html>
