@@ -320,7 +320,7 @@ def exam_ready():
     token = request.cookies.get('mytoken')
     db.favorites.update_many({'done':1,"token": token}, {'$set':{'done':0}})
     db.favorites.update_many({'show':0,"token": token}, {'$set': {'show':1}})
-    db.favorites.update_one({'index':1,"token": token}, {'$set': {'show': 0}})
+    db.favorites.update_one({'index':2,"token": token}, {'$set': {'show': 0}})
 
     return jsonify({'msg': '준비완료'})
 
@@ -329,7 +329,6 @@ def exam_ready():
 def exam_get():
     token = request.cookies.get('mytoken')
     words_list = list(db.favorites.find({"token":token},{"_id":False}))
-    print(words_list)
     return jsonify({'exams': words_list})
 
 
